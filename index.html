@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PT Sinar Mutiara Properti</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#0f172a;color:#fff;overflow-x:hidden}
+body{background:#0b1220;color:#fff;overflow-x:hidden}
 
-/* ================= HERO PARALLAX ================= */
+/* ===== PARALLAX HERO ===== */
 .hero{
 position:relative;
 height:100vh;
@@ -25,87 +26,108 @@ position:absolute;
 top:0;left:0;
 width:100%;
 height:120%;
-background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') center/cover no-repeat;
-z-index:-1;
+background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover no-repeat;
+z-index:-2;
 transform:translateY(0);
-transition:transform 0.2s ease-out;
 }
-.hero-overlay{
+.overlay{
 position:absolute;
 width:100%;
 height:100%;
-background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7));
+background:linear-gradient(to bottom,rgba(0,0,0,.8),rgba(0,0,0,.6));
+z-index:-1;
 }
-.hero h1{
-font-size:50px;
-letter-spacing:3px;
-overflow:hidden;
-}
-.hero p{max-width:600px;margin:20px auto}
 
+/* ===== SPLIT TEXT ===== */
+.split span{
+display:inline-block;
+opacity:0;
+filter:blur(10px);
+transform:translateY(40px);
+animation:reveal .6s forwards;
+}
+@keyframes reveal{
+to{opacity:1;filter:blur(0);transform:translateY(0);}
+}
+
+.hero h1{font-size:48px;letter-spacing:3px}
+.hero p{max-width:600px;margin:20px auto;color:#ccc}
 .btn{
-padding:14px 30px;
-border:none;
+padding:14px 32px;
 background:#22c55e;
-color:#fff;
+border:none;
 border-radius:30px;
+color:#fff;
 cursor:pointer;
 transition:.3s;
 }
-.btn:hover{transform:scale(1.05);background:#16a34a}
+.btn:hover{background:#16a34a;transform:scale(1.05)}
 
-/* ================= CURTAIN EFFECT ================= */
+/* ===== CURTAIN ===== */
 .curtain{
 position:fixed;
 top:0;left:0;
-width:100%;
-height:100%;
+width:100%;height:100%;
 background:#000;
-z-index:9999;
 transform:scaleY(0);
 transform-origin:top;
-transition:0.8s ease;
+transition:.8s ease;
+z-index:9999;
 }
 .curtain.active{
 transform:scaleY(1);
 transform-origin:bottom;
 }
 
-/* ================= SPLIT TEXT ================= */
-.split span{
-display:inline-block;
-opacity:0;
-filter:blur(8px);
-transform:translateY(30px);
-animation:reveal 0.6s forwards;
-}
-@keyframes reveal{
-to{opacity:1;filter:blur(0);transform:translateY(0);}
-}
-
-/* ================= CARDS ================= */
+/* ===== SECTIONS ===== */
 section{padding:100px 10%}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+h2{margin-bottom:40px;font-size:32px}
+
+/* ===== CARDS ===== */
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
 .card{
-background:#1e293b;
+background:#111827;
 border-radius:20px;
 overflow:hidden;
-cursor:pointer;
+box-shadow:0 20px 40px rgba(0,0,0,.4);
 transition:.4s;
 opacity:0;
 transform:translateY(60px);
+cursor:pointer;
 }
 .card.show{opacity:1;transform:translateY(0)}
 .card img{width:100%;height:200px;object-fit:cover}
 .card-body{padding:20px}
-.price{color:#22c55e;font-weight:600}
+.price{color:#22c55e;font-weight:600;margin:10px 0}
 
-/* ================= CINEMATIC MASK ================= */
+/* ===== TESTIMONI ===== */
+.testimoni-wrapper{overflow:hidden}
+.testimoni-track{
+display:flex;
+gap:20px;
+animation:scroll 25s linear infinite;
+}
+.testi{
+min-width:250px;
+background:#111827;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+@keyframes scroll{
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
+}
+
+/* ===== CINEMATIC MASK ===== */
 .mask{
 position:fixed;
 top:0;left:0;
-width:100%;
-height:100%;
+width:100%;height:100%;
 background:#000;
 clip-path:circle(0% at 50% 50%);
 transition:clip-path 1s ease;
@@ -120,6 +142,7 @@ background:#020617;
 padding:30px;
 text-align:center;
 font-size:14px;
+color:#aaa;
 }
 </style>
 </head>
@@ -128,56 +151,79 @@ font-size:14px;
 <div class="curtain" id="curtain"></div>
 <div class="mask" id="mask"></div>
 
+<!-- HERO -->
 <section class="hero">
 <div class="hero-bg" id="parallax"></div>
-<div class="hero-overlay"></div>
-<h1 class="split" id="splitText">PT SINAR MUTIARA</h1>
-<p>Hunian modern dengan nilai investasi tinggi dan desain berkelas untuk masa depan keluarga Anda.</p>
+<div class="overlay"></div>
+
+<h1 class="split" id="splitText">PT SINAR MUTIARA PROPERTI</h1>
+<p>Hunian modern bernilai investasi tinggi dengan desain elegan dan lokasi strategis untuk masa depan keluarga Anda.</p>
 <button class="btn" onclick="navigateSection()">Jelajahi Properti</button>
 </section>
 
+<!-- TIPE RUMAH -->
 <section id="properti">
 <h2>Tipe Rumah Premium</h2>
+
 <div class="cards">
-<div class="card" onclick="cinematicOpen()">
-<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6">
+<div class="card" onclick="cinematic()">
+<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200">
 <div class="card-body">
 <h3>Tipe 36</h3>
 <div class="price">Rp 300.000.000</div>
-<p>2 Kamar • 1 Kamar Mandi • Minimalis Modern</p>
+<p>2 Kamar • 1 Kamar Mandi • Desain Minimalis Modern</p>
 </div>
 </div>
 
-<div class="card" onclick="cinematicOpen()">
-<img src="https://images.unsplash.com/photo-1572120360610-d971b9b63900">
+<div class="card" onclick="cinematic()">
+<img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=1200">
 <div class="card-body">
 <h3>Tipe 60</h3>
 <div class="price">Rp 500.000.000</div>
-<p>3 Kamar • 2 Kamar Mandi • Carport • Taman</p>
+<p>3 Kamar • 2 Kamar Mandi • Carport • Taman Luas</p>
 </div>
+</div>
+</div>
+</section>
+
+<!-- TESTIMONI -->
+<section>
+<h2>Apa Kata Pelanggan Kami</h2>
+<div class="testimoni-wrapper">
+<div class="testimoni-track">
+<div class="testi">"Proses cepat & transparan. Sangat puas!" - Andi</div>
+<div class="testi">"Lokasi strategis & harga kompetitif." - Rina</div>
+<div class="testi">"Developer profesional & terpercaya." - Budi</div>
+<div class="testi">"Cicilan ringan dan tim responsif." - Sari</div>
+<div class="testi">"Investasi terbaik untuk keluarga." - Dimas</div>
 </div>
 </div>
 </section>
 
 <footer>
-© 2026 PT Sinar Mutiara Properti • Luxury Developer Experience
+© 2026 PT Sinar Mutiara Properti • Luxury Real Estate Experience
 </footer>
 
 <script>
-/* ===== SPLIT TEXT EFFECT ===== */
-const text=document.getElementById("splitText");
-text.innerHTML=text.textContent.split("").map((char,i)=>
-`<span style="animation-delay:${i*0.05}s">${char}</span>`
-).join("");
 
-/* ===== PARALLAX ===== */
+/* SPLIT TEXT */
+const text=document.getElementById("splitText");
+const letters=text.textContent.split("");
+text.innerHTML=letters.map((char,i)=>{
+if(char===" "){
+return "<span style='width:12px;display:inline-block'></span>";
+}
+return `<span style="animation-delay:${i*0.05}s">${char}</span>`;
+}).join("");
+
+/* PARALLAX */
 window.addEventListener("scroll",()=>{
 let scroll=window.pageYOffset;
 document.getElementById("parallax").style.transform=
 "translateY("+scroll*0.4+"px)";
 });
 
-/* ===== SCROLL REVEAL ===== */
+/* SCROLL REVEAL */
 const cards=document.querySelectorAll(".card");
 window.addEventListener("scroll",()=>{
 cards.forEach(card=>{
@@ -187,7 +233,7 @@ card.classList.add("show");
 });
 });
 
-/* ===== CURTAIN NAVIGATION ===== */
+/* CURTAIN */
 function navigateSection(){
 let curtain=document.getElementById("curtain");
 curtain.classList.add("active");
@@ -197,15 +243,15 @@ curtain.classList.remove("active");
 },800);
 }
 
-/* ===== CINEMATIC MASK ===== */
-function cinematicOpen(){
+/* CINEMATIC */
+function cinematic(){
 let mask=document.getElementById("mask");
 mask.classList.add("active");
 setTimeout(()=>{
 mask.classList.remove("active");
 },1000);
 }
-</script>
 
-</body> 
+</script>
+</body>
 </html>
