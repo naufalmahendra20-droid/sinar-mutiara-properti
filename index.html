@@ -1,257 +1,394 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PT Sinar Mutiara Properti</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier Living • Hunian Mewah</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (optional, but adds elegance) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#0b1220;color:#fff;overflow-x:hidden}
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-/* ===== PARALLAX HERO ===== */
-.hero{
-position:relative;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-text-align:center;
-overflow:hidden;
-}
-.hero-bg{
-position:absolute;
-top:0;left:0;
-width:100%;
-height:120%;
-background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600') center/cover no-repeat;
-z-index:-2;
-transform:translateY(0);
-}
-.overlay{
-position:absolute;
-width:100%;
-height:100%;
-background:linear-gradient(to bottom,rgba(0,0,0,.8),rgba(0,0,0,.6));
-z-index:-1;
-}
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c6a45c;
+            border-radius: 4px;
+        }
 
-/* ===== SPLIT TEXT ===== */
-.split span{
-display:inline-block;
-opacity:0;
-filter:blur(10px);
-transform:translateY(40px);
-animation:reveal .6s forwards;
-}
-@keyframes reveal{
-to{opacity:1;filter:blur(0);transform:translateY(0);}
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-.hero h1{font-size:48px;letter-spacing:3px}
-.hero p{max-width:600px;margin:20px auto;color:#ccc}
-.btn{
-padding:14px 32px;
-background:#22c55e;
-border:none;
-border-radius:30px;
-color:#fff;
-cursor:pointer;
-transition:.3s;
-}
-.btn:hover{background:#16a34a;transform:scale(1.05)}
+        /* Elegant transitions */
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards;
+        }
 
-/* ===== CURTAIN ===== */
-.curtain{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:#000;
-transform:scaleY(0);
-transform-origin:top;
-transition:.8s ease;
-z-index:9999;
-}
-.curtain.active{
-transform:scaleY(1);
-transform-origin:bottom;
-}
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* ===== SECTIONS ===== */
-section{padding:100px 10%}
-h2{margin-bottom:40px;font-size:32px}
+        /* Hero Section with cinematic overlay */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            margin-bottom: 60px;
+        }
 
-/* ===== CARDS ===== */
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-}
-.card{
-background:#111827;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 20px 40px rgba(0,0,0,.4);
-transition:.4s;
-opacity:0;
-transform:translateY(60px);
-cursor:pointer;
-}
-.card.show{opacity:1;transform:translateY(0)}
-.card img{width:100%;height:200px;object-fit:cover}
-.card-body{padding:20px}
-.price{color:#22c55e;font-weight:600;margin:10px 0}
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
 
-/* ===== TESTIMONI ===== */
-.testimoni-wrapper{overflow:hidden}
-.testimoni-track{
-display:flex;
-gap:20px;
-animation:scroll 25s linear infinite;
-}
-.testi{
-min-width:250px;
-background:#111827;
-padding:20px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,.4);
-}
-@keyframes scroll{
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
-}
+        .hero-content p {
+            font-size: 1.2rem;
+            margin: 20px 0 30px;
+            font-weight: 300;
+            color: #ddd;
+        }
 
-/* ===== CINEMATIC MASK ===== */
-.mask{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:#000;
-clip-path:circle(0% at 50% 50%);
-transition:clip-path 1s ease;
-z-index:9998;
-}
-.mask.active{
-clip-path:circle(150% at 50% 50%);
-}
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: transparent;
+            border: 2px solid #c6a45c;
+            color: #c6a45c;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
 
-footer{
-background:#020617;
-padding:30px;
-text-align:center;
-font-size:14px;
-color:#aaa;
-}
-</style>
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #c6a45c;
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: #0a0a0a;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            color: #fff;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #c6a45c;
+            margin: 15px auto 0;
+        }
+
+        /* Cards for house types */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: #141414;
+            border-radius: 12px;
+            overflow: hidden;
+            width: 350px;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #2a2a2a;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 40px -10px rgba(198, 164, 92, 0.3);
+            border-color: #c6a45c;
+        }
+
+        .card-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, #141414, transparent);
+        }
+
+        .card-36 .card-img {
+            background-image: url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+        }
+
+        .card-60 .card-img {
+            background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+        }
+
+        .card-content {
+            padding: 30px 20px 25px;
+            position: relative;
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #c6a45c;
+            margin: 15px 0;
+        }
+
+        .features {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        .features i {
+            color: #c6a45c;
+            margin-right: 5px;
+        }
+
+        .card p {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #0f0f0f;
+            padding: 80px 0;
+            margin-top: 40px;
+        }
+
+        .testimonial-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .testimonial-item {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            width: 300px;
+            border-left: 4px solid #c6a45c;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+
+        .testimonial-item:hover {
+            transform: scale(1.02);
+        }
+
+        .testimonial-item i {
+            color: #c6a45c;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        .testimonial-item p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #ddd;
+        }
+
+        .testimonial-item h4 {
+            margin-top: 20px;
+            font-weight: 500;
+            color: #c6a45c;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            padding: 40px 0;
+            text-align: center;
+            color: #888;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        footer .social a {
+            color: #c6a45c;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        footer .social a:hover {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .card-container {
+                gap: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Premier Living</h1>
+            <p>Eksklusif • Modern • Elegan</p>
+            <a href="#tipe-rumah" class="btn">Jelajahi Hunian</a>
+        </div>
+    </section>
 
-<div class="curtain" id="curtain"></div>
-<div class="mask" id="mask"></div>
+    <!-- Tipe Rumah Premium -->
+    <div class="container" id="tipe-rumah">
+        <h2 class="section-title">Tipe Rumah Premium</h2>
+        <div class="card-container">
+            <!-- Tipe 36 -->
+            <div class="card card-36">
+                <div class="card-img"></div>
+                <div class="card-content">
+                    <h3>Tipe 36</h3>
+                    <div class="price">Rp 300.000.000</div>
+                    <div class="features">
+                        <span><i class="fas fa-bed"></i> 2 Kamar</span>
+                        <span><i class="fas fa-bath"></i> 1 Kamar Mandi</span>
+                    </div>
+                    <p>Desain Minimalis Modern • Efisien & Elegan</p>
+                </div>
+            </div>
+            <!-- Tipe 60 -->
+            <div class="card card-60">
+                <div class="card-img"></div>
+                <div class="card-content">
+                    <h3>Tipe 60</h3>
+                    <div class="price">Rp 500.000.000</div>
+                    <div class="features">
+                        <span><i class="fas fa-bed"></i> 3 Kamar</span>
+                        <span><i class="fas fa-bath"></i> 2 Kamar Mandi</span>
+                        <span><i class="fas fa-car"></i> Carport</span>
+                    </div>
+                    <p>Taman Luas • Privasi & Kenyamanan</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- HERO -->
-<section class="hero">
-<div class="hero-bg" id="parallax"></div>
-<div class="overlay"></div>
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Apa Kata Pelanggan Kami</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-item">
+                    <i class="fas fa-quote-right"></i>
+                    <p>"Lokasi strategis & harga kompetitif."</p>
+                    <h4>– Rina</h4>
+                </div>
+                <div class="testimonial-item">
+                    <i class="fas fa-quote-right"></i>
+                    <p>"Developer profesional & terpercaya."</p>
+                    <h4>– Budi</h4>
+                </div>
+                <div class="testimonial-item">
+                    <i class="fas fa-quote-right"></i>
+                    <p>"Cicilan ringan dan responsif."</p>
+                    <h4>– Sari</h4>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1 class="split" id="splitText">PT SINAR MUTIARA PROPERTI</h1>
-<p>Hunian modern bernilai investasi tinggi dengan desain elegan dan lokasi strategis untuk masa depan keluarga Anda.</p>
-<button class="btn" onclick="navigateSection()">Jelajahi Properti</button>
-</section>
-
-<!-- TIPE RUMAH -->
-<section id="properti">
-<h2>Tipe Rumah Premium</h2>
-
-<div class="cards">
-<div class="card" onclick="cinematic()">
-<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200">
-<div class="card-body">
-<h3>Tipe 36</h3>
-<div class="price">Rp 300.000.000</div>
-<p>2 Kamar • 1 Kamar Mandi • Desain Minimalis Modern</p>
-</div>
-</div>
-
-<div class="card" onclick="cinematic()">
-<img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=1200">
-<div class="card-body">
-<h3>Tipe 60</h3>
-<div class="price">Rp 500.000.000</div>
-<p>3 Kamar • 2 Kamar Mandi • Carport • Taman Luas</p>
-</div>
-</div>
-</div>
-</section>
-
-<!-- TESTIMONI -->
-<section>
-<h2>Apa Kata Pelanggan Kami</h2>
-<div class="testimoni-wrapper">
-<div class="testimoni-track">
-<div class="testi">"Proses cepat & transparan. Sangat puas!" - Andi</div>
-<div class="testi">"Lokasi strategis & harga kompetitif." - Rina</div>
-<div class="testi">"Developer profesional & terpercaya." - Budi</div>
-<div class="testi">"Cicilan ringan dan tim responsif." - Sari</div>
-<div class="testi">"Investasi terbaik untuk keluarga." - Dimas</div>
-</div>
-</div>
-</section>
-
-<footer>
-© 2026 PT Sinar Mutiara Properti • Luxury Real Estate Experience
-</footer>
-
-<script>
-
-/* SPLIT TEXT */
-const text=document.getElementById("splitText");
-const letters=text.textContent.split("");
-text.innerHTML=letters.map((char,i)=>{
-if(char===" "){
-return "<span style='width:12px;display:inline-block'></span>";
-}
-return `<span style="animation-delay:${i*0.05}s">${char}</span>`;
-}).join("");
-
-/* PARALLAX */
-window.addEventListener("scroll",()=>{
-let scroll=window.pageYOffset;
-document.getElementById("parallax").style.transform=
-"translateY("+scroll*0.4+"px)";
-});
-
-/* SCROLL REVEAL */
-const cards=document.querySelectorAll(".card");
-window.addEventListener("scroll",()=>{
-cards.forEach(card=>{
-if(card.getBoundingClientRect().top<window.innerHeight-100){
-card.classList.add("show");
-}
-});
-});
-
-/* CURTAIN */
-function navigateSection(){
-let curtain=document.getElementById("curtain");
-curtain.classList.add("active");
-setTimeout(()=>{
-document.getElementById("properti").scrollIntoView({behavior:"smooth"});
-curtain.classList.remove("active");
-},800);
-}
-
-/* CINEMATIC */
-function cinematic(){
-let mask=document.getElementById("mask");
-mask.classList.add("active");
-setTimeout(()=>{
-mask.classList.remove("active");
-},1000);
-}
-
-</script>
+    <!-- Footer with contact (optional) -->
+    <footer>
+        <div class="container">
+            <p class="social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </p>
+            <p style="margin-top: 20px;">&copy; 2025 Premier Living. All rights reserved.</p>
+            <p style="font-size: 0.9rem;">Konsultasi & kunjungan : +62 812 3456 7890</p>
+        </div>
+    </footer>
 </body>
 </html>
