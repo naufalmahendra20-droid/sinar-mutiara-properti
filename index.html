@@ -3,264 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Temukan rumah impian Anda dengan simulasi KPR mudah di Sinar Mutiara Properti">
+    <title>Sinar Mutiara Properti - Rumah Impian dengan Simulasi KPR</title>
+    <meta name="description" content="Temukan properti idaman dan hitung simulasi KPR secara real-time. Sinar Mutiara Properti siap membantu Anda.">
     <meta name="theme-color" content="#2c3e50">
+    <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Sinar Mutiara Properti">
-    <meta property="og:description" content="Simulasi KPR dan listing properti pilihan">
+    <meta property="og:description" content="Simulasi KPR interaktif dan listing properti pilihan.">
     <meta property="og:type" content="website">
-    <title>Sinar Mutiara Properti</title>
+    <meta property="og:url" content="https://naufalmahendra20-droid.github.io/sinar-mutiara-properti">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Properti">
+    <!-- Font Awesome Icons (untuk ikon kecil) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
+        /* ===== RESET & VARIABLES ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
         }
 
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e67e22;
-            --success-color: #27ae60;
-            --error-color: #c0392b;
-            --bg-color: #f9f9f9;
+            --primary: #2c3e50;
+            --primary-light: #34495e;
+            --accent: #e67e22;
+            --accent-light: #f39c12;
+            --success: #27ae60;
+            --error: #c0392b;
+            --bg: #f8fafc;
             --card-bg: #ffffff;
-            --text-color: #333;
-            --border-color: #ddd;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Dark mode support */
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #1a1a1a;
-                --card-bg: #2d2d2d;
-                --text-color: #e0e0e0;
-                --border-color: #444;
+                --bg: #0f172a;
+                --card-bg: #1e293b;
+                --text: #f1f5f9;
+                --text-light: #94a3b8;
+                --border: #334155;
             }
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3 {
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 2.5rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 1.5rem; }
+        h3 { font-size: 1.25rem; }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
             text-align: center;
-            box-shadow: var(--shadow);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 2rem;
         }
 
-        header h1 {
-            font-size: 2.5rem;
+        .header h1 {
             margin-bottom: 0.5rem;
+            animation: fadeInDown 0.8s ease;
         }
 
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.1s both;
         }
 
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== CONTAINER ===== */
         .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
         }
 
-        h2 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            font-size: 1.8rem;
-        }
-
-        .property-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .property-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .property-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .property-card:focus-within {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
-        }
-
-        .property-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: var(--border-color);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-content h3 {
-            margin-bottom: 0.5rem;
-            color: #34495e;
-            font-size: 1.3rem;
-        }
-
-        .card-content p {
-            margin: 0.3rem 0;
-            font-size: 0.95rem;
-            color: var(--text-color);
-        }
-
-        .price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            margin: 0.5rem 0;
-        }
-
-        .kpr-calculator {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            margin: 3rem 0;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid var(--border-color);
-            border-radius: 5px;
-            font-size: 1rem;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
-        }
-
-        input:invalid {
-            border-color: var(--error-color);
-        }
-
-        .help-text {
-            display: block;
-            margin-top: 0.25rem;
-            font-size: 0.85rem;
-            color: #7f8c8d;
-        }
-
-        .error-message {
-            color: var(--error-color);
-            background-color: rgba(192, 57, 43, 0.1);
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            display: none;
-            border-left: 4px solid var(--error-color);
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .result {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
-            border-radius: 5px;
-            border-left: 4px solid var(--success-color);
-            font-size: 1.1rem;
-            text-align: center;
-        }
-
-        .result p {
-            margin: 0.5rem 0;
-        }
-
-        .result-label {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .result-value {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s, transform 0.3s;
-            z-index: 999;
-            box-shadow: var(--shadow);
-        }
-
-        #backToTop:hover {
-            background: #34495e;
-            transform: scale(1.1);
-        }
-
-        #backToTop:active {
-            transform: scale(0.95);
-        }
-
+        /* ===== SLIDER ===== */
         .swiper {
             width: 100%;
-            height: 400px;
-            margin: 2rem 0;
-            border-radius: 10px;
+            height: 450px;
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 4rem;
+        }
+
+        .swiper-slide {
+            position: relative;
+        }
+
+        .swiper-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, transparent 50%);
         }
 
         .swiper-slide img {
@@ -269,489 +143,674 @@
             object-fit: cover;
         }
 
-        .swiper-button-prev,
-        .swiper-button-next {
-            background-color: rgba(44, 62, 80, 0.7);
-            border-radius: 50%;
-            width: 50px !important;
-            height: 50px !important;
-            transition: background-color 0.3s;
-        }
-
-        .swiper-button-prev:hover,
-        .swiper-button-next:hover {
-            background-color: rgba(44, 62, 80, 0.9);
-        }
-
-        .swiper-button-prev::after,
-        .swiper-button-next::after {
+        .slide-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
             color: white;
-            font-size: 20px;
+            z-index: 10;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
+        .slide-caption h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .swiper-button-prev, .swiper-button-next {
+            color: white;
+            background: rgba(0,0,0,0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .swiper-button-prev:hover, .swiper-button-next:hover {
+            background: var(--accent);
+        }
+
+        .swiper-button-prev::after, .swiper-button-next::after {
+            font-size: 1.5rem;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--accent) !important;
+        }
+
+        /* ===== PROPERTIES GRID ===== */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .property-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+        }
+
+        .property-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .property-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.1);
+        }
+
+        .property-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .property-content {
+            padding: 1.5rem;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .property-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .property-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .property-price small {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: var(--text-light);
+        }
+
+        .property-cta {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .property-cta:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ===== KPR CALCULATOR ===== */
+        .kpr-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            margin: 4rem 0;
+        }
+
+        .kpr-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpr-header i {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        .kpr-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            color: var(--text-light);
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            font-size: 1rem;
+            background: var(--card-bg);
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+        }
+
+        .input-wrapper input:invalid {
+            border-color: var(--error);
+        }
+
+        .help-text {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+
+        .error-message {
+            background: rgba(192, 57, 43, 0.1);
+            color: var(--error);
+            padding: 1rem;
+            border-radius: 30px;
+            margin: 1rem 0 0;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 4px solid var(--error);
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
+            padding: 1.8rem;
+            border-radius: 30px;
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            border-left: 4px solid var(--success);
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .result-note {
+            grid-column: 1 / -1;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTop:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            header p {
-                font-size: 1rem;
-            }
-
-            .swiper {
-                height: 250px;
-            }
-
-            .property-grid {
-                gap: 1rem;
-            }
-
-            .kpr-calculator {
-                padding: 1.5rem;
-            }
+            .container { padding: 0 1.5rem 2rem; }
+            .swiper { height: 300px; }
+            .kpr-form { grid-template-columns: 1fr; }
+            .result-box { grid-template-columns: 1fr; }
+            .slide-caption h3 { font-size: 1.2rem; }
         }
 
         @media (max-width: 480px) {
-            .property-grid {
-                grid-template-columns: 1fr;
-            }
-
-            #backToTop {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-                bottom: 20px;
-                right: 20px;
-            }
+            .header { padding: 2rem 1rem; }
+            .properties-grid { grid-template-columns: 1fr; }
+            #backToTop { width: 40px; height: 40px; font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Sinar Mutiara Properti</h1>
-        <p>Temukan rumah impian Anda dengan simulasi KPR mudah</p>
+        <p>Wujudkan rumah impian dengan simulasi KPR instan dan pilihan properti terbaik</p>
     </header>
 
-    <div class="container">
-        <!-- Slider Gambar (Menggunakan Swiper) -->
-        <div class="swiper mySwiper" aria-label="Slider properti unggulan">
+    <main class="container">
+        <!-- Swiper Slider -->
+        <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="https://via.placeholder.com/1200x400?text=Rumah+Modern+1" alt="Properti unggulan modern 1" loading="lazy"></div>
-                <div class="swiper-slide"><img src="https://via.placeholder.com/1200x400?text=Rumah+Modern+2" alt="Properti unggulan modern 2" loading="lazy"></div>
-                <div class="swiper-slide"><img src="https://via.placeholder.com/1200x400?text=Rumah+Modern+3" alt="Properti unggulan modern 3" loading="lazy"></div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=400&fit=crop" alt="Rumah modern dengan kolam renang">
+                    <div class="slide-caption">
+                        <h3>Cluster Eksklusif</h3>
+                        <p>Lokasi strategis, lingkungan asri</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=400&fit=crop" alt="Villa minimalis">
+                    <div class="slide-caption">
+                        <h3>Villa Minimalis</h3>
+                        <p>Desain modern, cocok untuk keluarga</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&h=400&fit=crop" alt="Apartemen mewah">
+                    <div class="slide-caption">
+                        <h3>Apartemen Mewah</h3>
+                        <p>Pemandangan kota, fully furnished</p>
+                    </div>
+                </div>
             </div>
-            <div class="swiper-button-prev" aria-label="Slide sebelumnya"></div>
-            <div class="swiper-button-next" aria-label="Slide berikutnya"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
         </div>
 
         <!-- Daftar Properti -->
-        <h2>Properti Pilihan</h2>
-        <div class="property-grid" id="propertyGrid">
-            <!-- Properties akan di-render oleh JavaScript -->
+        <div class="section-title">
+            <i class="fas fa-building"></i>
+            <h2>Properti Pilihan</h2>
         </div>
+        <div class="properties-grid" id="propertyGrid"></div>
 
-        <!-- Kalkulator KPR Interaktif -->
-        <div class="kpr-calculator">
-            <h2>Simulasi KPR</h2>
-            <form id="kprForm" aria-label="Form simulasi KPR">
+        <!-- Kalkulator KPR -->
+        <section class="kpr-section" id="kpr">
+            <div class="kpr-header">
+                <i class="fas fa-calculator"></i>
+                <h2>Simulasi KPR Real-Time</h2>
+            </div>
+            <form id="kprForm" class="kpr-form">
                 <div class="form-group">
                     <label for="harga">Harga Properti (Rp)</label>
-                    <input 
-                        type="number" 
-                        id="harga" 
-                        aria-label="Harga properti dalam rupiah"
-                        aria-describedby="harga-help"
-                        placeholder="Contoh: 850000000" 
-                        min="0"
-                        step="1000000"
-                        inputmode="numeric"
-                    >
-                    <small id="harga-help" class="help-text">Masukkan harga properti dalam rupiah</small>
+                    <div class="input-wrapper">
+                        <i class="fas fa-home"></i>
+                        <input type="number" id="harga" placeholder="Misal: 850000000" min="0" step="1000000" value="850000000">
+                    </div>
+                    <span class="help-text">Contoh: 850000000 (850 juta)</span>
                 </div>
                 <div class="form-group">
                     <label for="dp">Uang Muka (Rp)</label>
-                    <input 
-                        type="number" 
-                        id="dp" 
-                        aria-label="Uang muka dalam rupiah"
-                        aria-describedby="dp-help"
-                        placeholder="Contoh: 200000000" 
-                        min="0"
-                        step="1000000"
-                        inputmode="numeric"
-                    >
-                    <small id="dp-help" class="help-text">Minimal 10% dari harga properti</small>
+                    <div class="input-wrapper">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <input type="number" id="dp" placeholder="Misal: 200000000" min="0" step="1000000" value="200000000">
+                    </div>
+                    <span class="help-text">Minimal 10% dari harga</span>
                 </div>
                 <div class="form-group">
-                    <label for="bunga">Suku Bunga (%) per tahun</label>
-                    <input 
-                        type="number" 
-                        id="bunga" 
-                        aria-label="Suku bunga per tahun"
-                        aria-describedby="bunga-help"
-                        placeholder="Contoh: 8.5" 
-                        min="0"
-                        max="20"
-                        step="0.1"
-                        inputmode="decimal"
-                    >
-                    <small id="bunga-help" class="help-text">Contoh: 8.5 untuk 8.5% per tahun</small>
+                    <label for="bunga">Suku Bunga (% per tahun)</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-percent"></i>
+                        <input type="number" id="bunga" placeholder="Misal: 8.5" min="0" max="20" step="0.1" value="8.5">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="tenor">Tenor (tahun)</label>
-                    <input 
-                        type="number" 
-                        id="tenor" 
-                        aria-label="Tenor kredit dalam tahun"
-                        aria-describedby="tenor-help"
-                        placeholder="Contoh: 15" 
-                        min="1"
-                        max="30"
-                        step="1"
-                        inputmode="numeric"
-                    >
-                    <small id="tenor-help" class="help-text">Antara 1-30 tahun</small>
-                </div>
-                <div id="validationError" class="error-message" role="alert" aria-live="polite"></div>
-                <div class="result" id="hasilKPR" role="region" aria-live="polite" aria-label="Hasil simulasi KPR">
-                    <p>Masukkan data di atas untuk melihat simulasi KPR</p>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="number" id="tenor" placeholder="Misal: 15" min="1" max="30" step="1" value="15">
+                    </div>
                 </div>
             </form>
-        </div>
-    </div>
+            <div id="validationError" class="error-message">
+                <i class="fas fa-exclamation-circle"></i>
+                <span></span>
+            </div>
+            <div class="result-box" id="hasilKPR">
+                <div class="result-item">
+                    <div class="result-label">Pinjaman</div>
+                    <div class="result-value" id="pinjamanValue">Rp 0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Angsuran / Bulan</div>
+                    <div class="result-value" id="angsuranValue">Rp 0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Bunga</div>
+                    <div class="result-value" id="bungaValue">Rp 0</div>
+                </div>
+                <div class="result-note" id="totalBayarNote"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Sinar Mutiara Properti. All rights reserved.</p>
+    </footer>
 
     <!-- Tombol Back to Top -->
-    <button 
-        id="backToTop" 
-        title="Kembali ke atas" 
-        aria-label="Tombol kembali ke atas halaman"
-        aria-hidden="true">↑</button>
+    <button id="backToTop" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // ==================== DATA ====================
+        (function() {
+            "use strict";
 
-        /**
-         * Property listing data
-         * @type {Array<Object>}
-         */
-        const properties = [
-            {
-                id: 1,
-                title: "Rumah Cluster Mewah",
-                description: "LT 120m², LB 90m², 3KT, 2KM",
-                price: 850000000,
-                image: "https://via.placeholder.com/300x200?text=Rumah+A",
-                altText: "Rumah cluster mewah dengan tanah 120m² dan bangunan 90m²"
-            },
-            {
-                id: 2,
-                title: "Villa Minimalis",
-                description: "LT 200m², LB 150m², 4KT, 3KM",
-                price: 1200000000,
-                image: "https://via.placeholder.com/300x200?text=Rumah+B",
-                altText: "Villa minimalis modern dengan luas tanah 200m² dan bangunan 150m²"
-            },
-            {
-                id: 3,
-                title: "Apartemen Studio",
-                description: "LT 36m², fully furnished",
-                price: 450000000,
-                image: "https://via.placeholder.com/300x200?text=Rumah+C",
-                altText: "Apartemen studio fully furnished siap huni"
-            }
-        ];
-
-        // ==================== CACHED DOM ELEMENTS ====================
-
-        const hargaInput = document.getElementById('harga');
-        const dpInput = document.getElementById('dp');
-        const bungaInput = document.getElementById('bunga');
-        const tenorInput = document.getElementById('tenor');
-        const hasilKPR = document.getElementById('hasilKPR');
-        const validationError = document.getElementById('validationError');
-        const propertyGrid = document.getElementById('propertyGrid');
-        const backToTop = document.getElementById('backToTop');
-        const kprForm = document.getElementById('kprForm');
-
-        // ==================== INITIALIZATION ====================
-
-        /**
-         * Initialize the application
-         */
-        function init() {
-            renderProperties();
-            initSwiper();
-            attachEventListeners();
-            setupScrollEvents();
-        }
-
-        // ==================== PROPERTY RENDERING ====================
-
-        /**
-         * Render property cards from data
-         */
-        function renderProperties() {
-            propertyGrid.innerHTML = properties.map(property => `
-                <div class="property-card fade-in" data-property-id="${property.id}">
-                    <img 
-                        src="${property.image}" 
-                        alt="${property.altText}"
-                        loading="lazy"
-                        onerror="this.style.backgroundColor='#e0e0e0'"
-                    >
-                    <div class="card-content">
-                        <h3>${escapeHtml(property.title)}</h3>
-                        <p>${escapeHtml(property.description)}</p>
-                        <p class="price">Rp ${formatCurrency(property.price)}</p>
-                    </div>
-                </div>
-            `).join('');
-
-            // Trigger fade-in animation
-            setTimeout(() => checkFadeInElements(), 100);
-        }
-
-        /**
-         * Escape HTML to prevent XSS
-         * @param {string} text - Text to escape
-         * @returns {string} Escaped text
-         */
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        /**
-         * Format number as Indonesian currency
-         * @param {number} value - Value to format
-         * @returns {string} Formatted currency string
-         */
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('id-ID').format(Math.round(value));
-        }
-
-        // ==================== SWIPER INITIALIZATION ====================
-
-        /**
-         * Initialize Swiper slider
-         */
-        function initSwiper() {
-            new Swiper('.mySwiper', {
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
+            // ========== DATA ==========
+            const properties = [
+                {
+                    id: 1,
+                    title: "Rumah Cluster Mewah",
+                    description: "LT 120m², LB 90m², 3KT, 2KM, carport, taman belakang",
+                    price: 850000000,
+                    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop",
+                    alt: "Rumah cluster mewah dengan taman",
+                    tag: "Best Seller"
                 },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                {
+                    id: 2,
+                    title: "Villa Minimalis",
+                    description: "LT 200m², LB 150m², 4KT, 3KM, kolam renang pribadi",
+                    price: 1200000000,
+                    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop",
+                    alt: "Villa minimalis dengan kolam renang",
+                    tag: "Premium"
                 },
-                effect: 'fade',
-                fadeEffect: {
-                    crossFade: true,
+                {
+                    id: 3,
+                    title: "Apartemen Studio",
+                    description: "LT 36m², fully furnished, view kota, akses mall",
+                    price: 450000000,
+                    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop",
+                    alt: "Apartemen studio modern",
+                    tag: "Promo"
                 },
-            });
-        }
-
-        // ==================== KPR CALCULATOR ====================
-
-        /**
-         * Validate KPR form inputs
-         * @returns {Object} Validation result with isValid flag and error message
-         */
-        function validateKPRInputs() {
-            const harga = parseFloat(hargaInput.value) || 0;
-            const dp = parseFloat(dpInput.value) || 0;
-            const bunga = parseFloat(bungaInput.value) || 0;
-            const tenor = parseFloat(tenorInput.value) || 0;
-
-            if (harga <= 0) {
-                return {
-                    isValid: false,
-                    message: "❌ Harga properti harus lebih besar dari 0"
-                };
-            }
-
-            if (dp < 0) {
-                return {
-                    isValid: false,
-                    message: "❌ Uang muka tidak boleh negatif"
-                };
-            }
-
-            if (dp > harga) {
-                return {
-                    isValid: false,
-                    message: "❌ Uang muka tidak boleh lebih besar dari harga properti"
-                };
-            }
-
-            const minDP = harga * 0.1;
-            if (dp < minDP) {
-                return {
-                    isValid: false,
-                    message: `⚠️ Uang muka minimum adalah 10% dari harga (Rp ${formatCurrency(minDP)})`
-                };
-            }
-
-            if (bunga < 0 || bunga > 20) {
-                return {
-                    isValid: false,
-                    message: "❌ Suku bunga harus antara 0-20%"
-                };
-            }
-
-            if (tenor <= 0 || tenor > 30) {
-                return {
-                    isValid: false,
-                    message: "❌ Tenor harus antara 1-30 tahun"
-                };
-            }
-
-            return { isValid: true, message: "" };
-        }
-
-        /**
-         * Calculate KPR monthly installment using compound interest formula
-         * Formula: P = L[c(1 + c)^n]/[(1 + c)^n - 1]
-         */
-        function hitungKPR() {
-            // Clear previous error
-            validationError.classList.remove('show');
-            validationError.textContent = '';
-
-            // Validate inputs
-            const validation = validateKPRInputs();
-            if (!validation.isValid) {
-                validationError.textContent = validation.message;
-                validationError.classList.add('show');
-                hasilKPR.innerHTML = '<p>Periksa kembali data Anda</p>';
-                return;
-            }
-
-            const harga = parseFloat(hargaInput.value) || 0;
-            const dp = parseFloat(dpInput.value) || 0;
-            const bunga = parseFloat(bungaInput.value) || 0;
-            const tenor = parseFloat(tenorInput.value) || 0;
-
-            if (harga === 0) {
-                hasilKPR.innerHTML = '<p>Masukkan data untuk melihat simulasi KPR</p>';
-                return;
-            }
-
-            const pinjaman = harga - dp;
-            const bungaBulanan = bunga / 100 / 12;
-            const bulan = tenor * 12;
-            
-            let angsuran = 0;
-            if (pinjaman > 0 && bunga > 0 && tenor > 0) {
-                const pembilang = bungaBulanan * Math.pow(1 + bungaBulanan, bulan);
-                const penyebut = Math.pow(1 + bungaBulanan, bulan) - 1;
-                angsuran = pinjaman * (pembilang / penyebut);
-            }
-
-            const totalBayar = angsuran * bulan;
-            const totalBunga = totalBayar - pinjaman;
-
-            hasilKPR.innerHTML = `
-                <p>
-                    <span class="result-label">Jumlah Pinjaman:</span><br>
-                    <span class="result-value">Rp ${formatCurrency(pinjaman)}</span>
-                </p>
-                <p>
-                    <span class="result-label">Angsuran per Bulan:</span><br>
-                    <span class="result-value">Rp ${formatCurrency(angsuran)}</span>
-                </p>
-                <p style="margin-top: 1rem; font-size: 0.95rem; opacity: 0.8;">
-                    Total bayar selama ${tenor} tahun: Rp ${formatCurrency(totalBayar)}<br>
-                    Total bunga: Rp ${formatCurrency(totalBunga)}
-                </p>
-            `;
-        }
-
-        // ==================== FADE-IN ANIMATION ====================
-
-        /**
-         * Check and apply fade-in animation to elements
-         */
-        function checkFadeInElements() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) {
-                    el.classList.add('visible');
+                {
+                    id: 4,
+                    title: "Rumah Tradisional",
+                    description: "LT 300m², LB 200m², 5KT, 4KM, konsep joglo",
+                    price: 950000000,
+                    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop",
+                    alt: "Rumah tradisional joglo",
+                    tag: "Eksklusif"
                 }
-            });
-        }
+            ];
 
-        // ==================== SCROLL EVENTS ====================
+            // ========== DOM ELEMENTS ==========
+            const propertyGrid = document.getElementById('propertyGrid');
+            const hargaInput = document.getElementById('harga');
+            const dpInput = document.getElementById('dp');
+            const bungaInput = document.getElementById('bunga');
+            const tenorInput = document.getElementById('tenor');
+            const hasilKPR = document.getElementById('hasilKPR');
+            const pinjamanSpan = document.getElementById('pinjamanValue');
+            const angsuranSpan = document.getElementById('angsuranValue');
+            const bungaTotalSpan = document.getElementById('bungaValue');
+            const totalBayarNote = document.getElementById('totalBayarNote');
+            const validationError = document.getElementById('validationError');
+            const errorSpan = validationError.querySelector('span');
+            const backToTop = document.getElementById('backToTop');
+            const kprForm = document.getElementById('kprForm');
 
-        /**
-         * Setup scroll event listeners
-         */
-        function setupScrollEvents() {
-            window.addEventListener('scroll', checkFadeInElements, { passive: true });
-            window.addEventListener('scroll', handleBackToTopButton, { passive: true });
-        }
-
-        /**
-         * Handle back-to-top button visibility
-         */
-        function handleBackToTopButton() {
-            if (window.scrollY > 300) {
-                backToTop.style.display = 'flex';
-            } else {
-                backToTop.style.display = 'none';
+            // ========== RENDER PROPERTIES ==========
+            function renderProperties() {
+                propertyGrid.innerHTML = properties.map(prop => `
+                    <div class="property-card fade-in" data-id="${prop.id}">
+                        <div class="property-image">
+                            <img src="${prop.image}" alt="${prop.alt}" loading="lazy">
+                            <span class="property-tag">${prop.tag}</span>
+                        </div>
+                        <div class="property-content">
+                            <h3 class="property-title">${escapeHtml(prop.title)}</h3>
+                            <p class="property-desc">${escapeHtml(prop.description)}</p>
+                            <div class="property-price">Rp ${formatCurrency(prop.price)} <small></small></div>
+                            <a href="#" class="property-cta" onclick="event.preventDefault()">Detail</a>
+                        </div>
+                    </div>
+                `).join('');
             }
-        }
 
-        /**
-         * Scroll to top smoothly
-         */
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
 
-        // ==================== EVENT LISTENERS ====================
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('id-ID').format(value);
+            }
 
-        /**
-         * Attach event listeners to form inputs
-         */
-        function attachEventListeners() {
-            const inputs = [hargaInput, dpInput, bungaInput, tenorInput];
-            
-            inputs.forEach(input => {
-                // Use 'input' event for real-time updates
-                input.addEventListener('input', hitungKPR, { passive: true });
-                
-                // Use 'change' event for validation after focus loss
-                input.addEventListener('change', hitungKPR);
+            // ========== KPR CALCULATOR ==========
+            function validateInputs() {
+                const harga = parseFloat(hargaInput.value) || 0;
+                const dp = parseFloat(dpInput.value) || 0;
+                const bunga = parseFloat(bungaInput.value) || 0;
+                const tenor = parseFloat(tenorInput.value) || 0;
+
+                if (harga <= 0) return { valid: false, msg: 'Harga properti harus lebih dari 0' };
+                if (dp < 0) return { valid: false, msg: 'Uang muka tidak boleh negatif' };
+                if (dp > harga) return { valid: false, msg: 'Uang muka tidak boleh melebihi harga' };
+                const minDp = harga * 0.1;
+                if (dp < minDp) return { valid: false, msg: `Uang muka minimal 10% (Rp ${formatCurrency(minDp)})` };
+                if (bunga < 0 || bunga > 20) return { valid: false, msg: 'Suku bunga harus antara 0-20%' };
+                if (tenor < 1 || tenor > 30) return { valid: false, msg: 'Tenor harus antara 1-30 tahun' };
+                return { valid: true };
+            }
+
+            function hitungKPR() {
+                const validation = validateInputs();
+                if (!validation.valid) {
+                    validationError.classList.add('show');
+                    errorSpan.textContent = validation.msg;
+                    // Reset tampilan hasil
+                    pinjamanSpan.textContent = 'Rp 0';
+                    angsuranSpan.textContent = 'Rp 0';
+                    bungaTotalSpan.textContent = 'Rp 0';
+                    totalBayarNote.textContent = '';
+                    return;
+                } else {
+                    validationError.classList.remove('show');
+                }
+
+                const harga = parseFloat(hargaInput.value);
+                const dp = parseFloat(dpInput.value);
+                const bunga = parseFloat(bungaInput.value);
+                const tenor = parseFloat(tenorInput.value);
+
+                const pinjaman = harga - dp;
+                const bungaBulanan = bunga / 100 / 12;
+                const bulan = tenor * 12;
+
+                let angsuran = 0;
+                let totalBunga = 0;
+                let totalBayar = 0;
+
+                if (pinjaman > 0 && bunga > 0 && tenor > 0) {
+                    if (bungaBulanan === 0) {
+                        angsuran = pinjaman / bulan;
+                    } else {
+                        const factor = Math.pow(1 + bungaBulanan, bulan);
+                        angsuran = pinjaman * (bungaBulanan * factor) / (factor - 1);
+                    }
+                    totalBayar = angsuran * bulan;
+                    totalBunga = totalBayar - pinjaman;
+                }
+
+                pinjamanSpan.textContent = `Rp ${formatCurrency(pinjaman)}`;
+                angsuranSpan.textContent = `Rp ${formatCurrency(angsuran)}`;
+                bungaTotalSpan.textContent = `Rp ${formatCurrency(totalBunga)}`;
+                totalBayarNote.textContent = `Total pembayaran selama ${tenor} tahun: Rp ${formatCurrency(totalBayar)}`;
+            }
+
+            // ========== ANIMASI SCROLL (FADE-IN) ==========
+            function checkFadeIn() {
+                const cards = document.querySelectorAll('.property-card.fade-in');
+                const windowHeight = window.innerHeight;
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < windowHeight - 100) {
+                        card.classList.add('visible');
+                    }
+                });
+            }
+
+            // ========== BACK TO TOP ==========
+            function toggleBackToTop() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            }
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Prevent form submission
-            kprForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-            });
-        }
+            // ========== SWIPER INIT ==========
+            function initSwiper() {
+                new Swiper('.mySwiper', {
+                    loop: true,
+                    autoplay: { delay: 5000, disableOnInteraction: false },
+                    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                    pagination: { el: '.swiper-pagination', clickable: true },
+                    effect: 'fade',
+                    fadeEffect: { crossFade: true },
+                });
+            }
 
-        // ==================== PAGE LOAD ====================
+            // ========== EVENT LISTENERS ==========
+            function attachEvents() {
+                [hargaInput, dpInput, bungaInput, tenorInput].forEach(input => {
+                    input.addEventListener('input', hitungKPR);
+                });
+                kprForm.addEventListener('submit', e => e.preventDefault());
+                window.addEventListener('scroll', () => {
+                    checkFadeIn();
+                    toggleBackToTop();
+                }, { passive: true });
+                window.addEventListener('load', () => {
+                    checkFadeIn();
+                    hitungKPR();
+                });
+            }
 
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
+            // ========== INIT ==========
+            function init() {
+                renderProperties();
+                initSwiper();
+                attachEvents();
+                // Panggil sekali untuk hasil awal
+                hitungKPR();
+            }
+
             init();
-        }
-
-        // Check fade-in on initial load
-        window.addEventListener('load', checkFadeInElements);
+        })();
     </script>
 </body>
 </html>
