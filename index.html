@@ -746,78 +746,101 @@
     </div>
 
     <script>
-        // ===== SPLIT TEXT REVEAL =====
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroTitle = document.getElementById('hero-title');
-            const text = heroTitle.innerText;
-            heroTitle.innerHTML = '';
-            [...text].forEach((char, i) => {
-                const span = document.createElement('span');
-                span.textContent = char;
-                span.style.animationDelay = `${i * 0.05}s`;
-                heroTitle.appendChild(span);
-            });
-
-            // Also split other titles if desired
-            document.querySelectorAll('.split-text').forEach(el => {
-                if (el.id === 'hero-title') return;
-                const txt = el.innerText;
-                el.innerHTML = '';
-                [...txt].forEach((char, i) => {
+        (function() {
+            // SPLIT TEXT REVEAL (dengan pengecekan elemen)
+            function splitText(element) {
+                if (!element) return;
+                const text = element.innerText;
+                if (!text) return;
+                element.innerHTML = '';
+                [...text].forEach((char, i) => {
                     const span = document.createElement('span');
                     span.textContent = char;
-                    span.style.animationDelay = `${i * 0.03}s`;
-                    el.appendChild(span);
+                    span.style.animationDelay = `${i * 0.05}s`;
+                    element.appendChild(span);
                 });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Split text untuk hero title
+                const heroTitle = document.getElementById('hero-title');
+                splitText(heroTitle);
+
+                // Split text untuk semua elemen dengan class 'split-text' (kecuali hero-title)
+                document.querySelectorAll('.split-text').forEach(el => {
+                    if (el.id !== 'hero-title') {
+                        splitText(el);
+                    }
+                });
+
+                // PAGE CURTAIN
+                const curtain = document.getElementById('curtain');
+                if (curtain) {
+                    document.querySelectorAll('nav a[data-section]').forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const targetId = this.getAttribute('href').substring(1); // remove #
+                            if (curtain) {
+                                curtain.classList.add('active');
+                                setTimeout(() => {
+                                    const targetEl = document.getElementById(targetId);
+                                    if (targetEl) {
+                                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                    setTimeout(() => {
+                                        curtain.classList.remove('active');
+                                    }, 400);
+                                }, 400);
+                            }
+                        });
+                    });
+                }
+
+                // FLOOR PLAN MODAL
+                window.showFloorplan = function(type) {
+                    const modal = document.getElementById('floorplanModal');
+                    const desc = document.getElementById('floorplanDesc');
+                    if (modal && desc) {
+                        desc.innerText = `Denah untuk ${type}: Lantai 1: Ruang tamu, dapur, kamar tidur utama. Lantai 2: 2 kamar tidur, kamar mandi, balkon.`;
+                        modal.classList.add('active');
+                    }
+                };
+                window.closeModal = function() {
+                    const modal = document.getElementById('floorplanModal');
+                    if (modal) modal.classList.remove('active');
+                };
+                window.onclick = function(e) {
+                    if (e.target.classList.contains('modal')) closeModal();
+                };
+
+                // TESTIMONIAL CAROUSEL
+                const track = document.getElementById('carouselTrack');
+                const cards = document.querySelectorAll('.testimonial-card');
+                if (track && cards.length > 0) {
+                    let currentIndex = 0;
+                    // Hitung lebar card (ambil dari card pertama)
+                    const cardStyle = getComputedStyle(cards[0]);
+                    const cardWidth = cards[0].offsetWidth + parseInt(cardStyle.marginRight || 30);
+                    const visibleCards = Math.min(3, cards.length); // jumlah maksimal yang terlihat
+                    const maxIndex = Math.max(0, cards.length - visibleCards);
+
+                    window.moveCarousel = function(direction) {
+                        currentIndex += direction;
+                        if (currentIndex < 0) currentIndex = 0;
+                        if (currentIndex > maxIndex) currentIndex = maxIndex;
+                        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                    };
+
+                    // Sembunyikan tombol jika tidak perlu
+                    if (maxIndex <= 0) {
+                        document.querySelectorAll('.carousel-btn').forEach(btn => btn.style.display = 'none');
+                    }
+                } else {
+                    // Sembunyikan tombol jika tidak ada testimonial
+                    document.querySelectorAll('.carousel-btn').forEach(btn => btn.style.display = 'none');
+                }
             });
-        });
-
-        // ===== PAGE CURTAIN =====
-        const curtain = document.getElementById('curtain');
-        document.querySelectorAll('nav a[data-section]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1); // remove #
-                curtain.classList.add('active');
-                setTimeout(() => {
-                    document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => {
-                        curtain.classList.remove('active');
-                    }, 400);
-                }, 400);
-            });
-        });
-
-        // ===== FLOOR PLAN MODAL =====
-        function showFloorplan(type) {
-            const modal = document.getElementById('floorplanModal');
-            const desc = document.getElementById('floorplanDesc');
-            desc.innerText = `Denah untuk ${type}: Lantai 1: Ruang tamu, dapur, kamar tidur utama. Lantai 2: 2 kamar tidur, kamar mandi, balkon.`;
-            modal.classList.add('active');
-        }
-        function closeModal() {
-            document.getElementById('floorplanModal').classList.remove('active');
-        }
-        window.onclick = function(e) {
-            if (e.target.classList.contains('modal')) closeModal();
-        }
-
-        // ===== TESTIMONIAL CAROUSEL =====
-        let currentIndex = 0;
-        const track = document.getElementById('carouselTrack');
-        const cards = document.querySelectorAll('.testimonial-card');
-        const cardWidth = cards[0]?.offsetWidth + 30 || 380; // width + gap
-        const maxIndex = cards.length - 3; // show 3 at a time
-
-        function moveCarousel(direction) {
-            currentIndex += direction;
-            if (currentIndex < 0) currentIndex = 0;
-            if (currentIndex > maxIndex) currentIndex = maxIndex;
-            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-        }
-
-        // ===== GLITCH ON SOME ELEMENTS =====
-        // Already handled by CSS class
+        })();
     </script>
 </body>
-</html>
+                        </html>
