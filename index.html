@@ -248,17 +248,15 @@ transition:.3s;
 
 <!-- SCRIPT -->
 <script>
-// Loader fade out
-window.addEventListener("load",()=>{
-document.getElementById("loader").style.display="none";
-});
-
-// Hamburger menu
 const hamburger=document.querySelector(".hamburger");
 const navMenu=document.querySelector(".nav-menu");
+
+if(hamburger){
 hamburger.addEventListener("click",()=>{
 navMenu.classList.toggle("active");
 });
+}
+  
 </script>
 
 </body>
