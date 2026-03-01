@@ -1,1 +1,757 @@
-<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Sinar Mutiara Properti</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            background-color: #fff;\n            color: #333;\n            transition: background-color 0.5s, color 0.5s;\n        }\n        body.dark-mode {\n            background-color: #333;\n            color: #fff;\n        }\n        header, footer {\n            background: #007bff;\n            color: white;\n            padding: 10px;\n            text-align: center;\n        }\n        button {\n            padding: 10px;\n            border: none;\n            cursor: pointer;\n        }\n        @media (prefers-color-scheme: dark) {\n            body {\n                background-color: #1e1e1e;\n                color: #c1c1c1;\n            }\n        }\n    </style>\n</head>\n<body>\n    <header>\n        <h1>Welcome to Sinar Mutiara Properti</h1>\n        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>\n    </header>\n    <main>\n        <h2>Our Properties</h2>\n        <p>Discover the best properties available for you.</p>\n    </main>\n    <footer>\n        <p>&copy; 2026 Sinar Mutiara Properti</p>\n    </footer>\n    <script>\n        function toggleDarkMode() {\n            document.body.classList.toggle('dark-mode');\n        }\n    </script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Temukan rumah impian Anda dengan simulasi KPR mudah di Sinar Mutiara Properti">
+    <meta name="theme-color" content="#2c3e50">
+    <meta property="og:title" content="Sinar Mutiara Properti">
+    <meta property="og:description" content="Simulasi KPR dan listing properti pilihan">
+    <meta property="og:type" content="website">
+    <title>Sinar Mutiara Properti</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --success-color: #27ae60;
+            --error-color: #c0392b;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-color: #ddd;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --card-bg: #2d2d2d;
+                --text-color: #e0e0e0;
+                --border-color: #444;
+            }
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .property-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .property-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .property-card:focus-within {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .property-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: var(--border-color);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            margin-bottom: 0.5rem;
+            color: #34495e;
+            font-size: 1.3rem;
+        }
+
+        .card-content p {
+            margin: 0.3rem 0;
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 0.5rem 0;
+        }
+
+        .kpr-calculator {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin: 3rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+        }
+
+        input:invalid {
+            border-color: var(--error-color);
+        }
+
+        .help-text {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            background-color: rgba(192, 57, 43, 0.1);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+            border-left: 4px solid var(--error-color);
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .result {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
+            border-radius: 5px;
+            border-left: 4px solid var(--success-color);
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .result p {
+            margin: 0.5rem 0;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .result-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.3s;
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        #backToTop:hover {
+            background: #34495e;
+            transform: scale(1.1);
+        }
+
+        #backToTop:active {
+            transform: scale(0.95);
+        }
+
+        .swiper {
+            width: 100%;
+            height: 400px;
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            background-color: rgba(44, 62, 80, 0.7);
+            border-radius: 50%;
+            width: 50px !important;
+            height: 50px !important;
+            transition: background-color 0.3s;
+        }
+
+        .swiper-button-prev:hover,
+        .swiper-button-next:hover {
+            background-color: rgba(44, 62, 80, 0.9);
+        }
+
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            color: white;
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .swiper {
+                height: 250px;
+            }
+
+            .property-grid {
+                gap: 1rem;
+            }
+
+            .kpr-calculator {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #backToTop {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sinar Mutiara Properti</h1>
+        <p>Temukan rumah impian Anda dengan simulasi KPR mudah</p>
+    </header>
+
+    <div class="container">
+        <!-- Slider Gambar (Menggunakan Swiper) -->
+        <div class="swiper mySwiper" aria-label="Slider properti unggulan">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="https://via.placeholder.com/1200x400?text=Rumah+Modern+1" alt="Properti unggulan modern 1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="https://via.placeholder.com/1200x400?text=Rumah+Modern+2" alt="Properti unggulan modern 2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="https://via.placeholder.com/1200x400?text=Rumah+Modern+3" alt="Properti unggulan modern 3" loading="lazy"></div>
+            </div>
+            <div class="swiper-button-prev" aria-label="Slide sebelumnya"></div>
+            <div class="swiper-button-next" aria-label="Slide berikutnya"></div>
+        </div>
+
+        <!-- Daftar Properti -->
+        <h2>Properti Pilihan</h2>
+        <div class="property-grid" id="propertyGrid">
+            <!-- Properties akan di-render oleh JavaScript -->
+        </div>
+
+        <!-- Kalkulator KPR Interaktif -->
+        <div class="kpr-calculator">
+            <h2>Simulasi KPR</h2>
+            <form id="kprForm" aria-label="Form simulasi KPR">
+                <div class="form-group">
+                    <label for="harga">Harga Properti (Rp)</label>
+                    <input 
+                        type="number" 
+                        id="harga" 
+                        aria-label="Harga properti dalam rupiah"
+                        aria-describedby="harga-help"
+                        placeholder="Contoh: 850000000" 
+                        min="0"
+                        step="1000000"
+                        inputmode="numeric"
+                    >
+                    <small id="harga-help" class="help-text">Masukkan harga properti dalam rupiah</small>
+                </div>
+                <div class="form-group">
+                    <label for="dp">Uang Muka (Rp)</label>
+                    <input 
+                        type="number" 
+                        id="dp" 
+                        aria-label="Uang muka dalam rupiah"
+                        aria-describedby="dp-help"
+                        placeholder="Contoh: 200000000" 
+                        min="0"
+                        step="1000000"
+                        inputmode="numeric"
+                    >
+                    <small id="dp-help" class="help-text">Minimal 10% dari harga properti</small>
+                </div>
+                <div class="form-group">
+                    <label for="bunga">Suku Bunga (%) per tahun</label>
+                    <input 
+                        type="number" 
+                        id="bunga" 
+                        aria-label="Suku bunga per tahun"
+                        aria-describedby="bunga-help"
+                        placeholder="Contoh: 8.5" 
+                        min="0"
+                        max="20"
+                        step="0.1"
+                        inputmode="decimal"
+                    >
+                    <small id="bunga-help" class="help-text">Contoh: 8.5 untuk 8.5% per tahun</small>
+                </div>
+                <div class="form-group">
+                    <label for="tenor">Tenor (tahun)</label>
+                    <input 
+                        type="number" 
+                        id="tenor" 
+                        aria-label="Tenor kredit dalam tahun"
+                        aria-describedby="tenor-help"
+                        placeholder="Contoh: 15" 
+                        min="1"
+                        max="30"
+                        step="1"
+                        inputmode="numeric"
+                    >
+                    <small id="tenor-help" class="help-text">Antara 1-30 tahun</small>
+                </div>
+                <div id="validationError" class="error-message" role="alert" aria-live="polite"></div>
+                <div class="result" id="hasilKPR" role="region" aria-live="polite" aria-label="Hasil simulasi KPR">
+                    <p>Masukkan data di atas untuk melihat simulasi KPR</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tombol Back to Top -->
+    <button 
+        id="backToTop" 
+        title="Kembali ke atas" 
+        aria-label="Tombol kembali ke atas halaman"
+        aria-hidden="true">↑</button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // ==================== DATA ====================
+
+        /**
+         * Property listing data
+         * @type {Array<Object>}
+         */
+        const properties = [
+            {
+                id: 1,
+                title: "Rumah Cluster Mewah",
+                description: "LT 120m², LB 90m², 3KT, 2KM",
+                price: 850000000,
+                image: "https://via.placeholder.com/300x200?text=Rumah+A",
+                altText: "Rumah cluster mewah dengan tanah 120m² dan bangunan 90m²"
+            },
+            {
+                id: 2,
+                title: "Villa Minimalis",
+                description: "LT 200m², LB 150m², 4KT, 3KM",
+                price: 1200000000,
+                image: "https://via.placeholder.com/300x200?text=Rumah+B",
+                altText: "Villa minimalis modern dengan luas tanah 200m² dan bangunan 150m²"
+            },
+            {
+                id: 3,
+                title: "Apartemen Studio",
+                description: "LT 36m², fully furnished",
+                price: 450000000,
+                image: "https://via.placeholder.com/300x200?text=Rumah+C",
+                altText: "Apartemen studio fully furnished siap huni"
+            }
+        ];
+
+        // ==================== CACHED DOM ELEMENTS ====================
+
+        const hargaInput = document.getElementById('harga');
+        const dpInput = document.getElementById('dp');
+        const bungaInput = document.getElementById('bunga');
+        const tenorInput = document.getElementById('tenor');
+        const hasilKPR = document.getElementById('hasilKPR');
+        const validationError = document.getElementById('validationError');
+        const propertyGrid = document.getElementById('propertyGrid');
+        const backToTop = document.getElementById('backToTop');
+        const kprForm = document.getElementById('kprForm');
+
+        // ==================== INITIALIZATION ====================
+
+        /**
+         * Initialize the application
+         */
+        function init() {
+            renderProperties();
+            initSwiper();
+            attachEventListeners();
+            setupScrollEvents();
+        }
+
+        // ==================== PROPERTY RENDERING ====================
+
+        /**
+         * Render property cards from data
+         */
+        function renderProperties() {
+            propertyGrid.innerHTML = properties.map(property => `
+                <div class="property-card fade-in" data-property-id="${property.id}">
+                    <img 
+                        src="${property.image}" 
+                        alt="${property.altText}"
+                        loading="lazy"
+                        onerror="this.style.backgroundColor='#e0e0e0'"
+                    >
+                    <div class="card-content">
+                        <h3>${escapeHtml(property.title)}</h3>
+                        <p>${escapeHtml(property.description)}</p>
+                        <p class="price">Rp ${formatCurrency(property.price)}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Trigger fade-in animation
+            setTimeout(() => checkFadeInElements(), 100);
+        }
+
+        /**
+         * Escape HTML to prevent XSS
+         * @param {string} text - Text to escape
+         * @returns {string} Escaped text
+         */
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        /**
+         * Format number as Indonesian currency
+         * @param {number} value - Value to format
+         * @returns {string} Formatted currency string
+         */
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('id-ID').format(Math.round(value));
+        }
+
+        // ==================== SWIPER INITIALIZATION ====================
+
+        /**
+         * Initialize Swiper slider
+         */
+        function initSwiper() {
+            new Swiper('.mySwiper', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true,
+                },
+            });
+        }
+
+        // ==================== KPR CALCULATOR ====================
+
+        /**
+         * Validate KPR form inputs
+         * @returns {Object} Validation result with isValid flag and error message
+         */
+        function validateKPRInputs() {
+            const harga = parseFloat(hargaInput.value) || 0;
+            const dp = parseFloat(dpInput.value) || 0;
+            const bunga = parseFloat(bungaInput.value) || 0;
+            const tenor = parseFloat(tenorInput.value) || 0;
+
+            if (harga <= 0) {
+                return {
+                    isValid: false,
+                    message: "❌ Harga properti harus lebih besar dari 0"
+                };
+            }
+
+            if (dp < 0) {
+                return {
+                    isValid: false,
+                    message: "❌ Uang muka tidak boleh negatif"
+                };
+            }
+
+            if (dp > harga) {
+                return {
+                    isValid: false,
+                    message: "❌ Uang muka tidak boleh lebih besar dari harga properti"
+                };
+            }
+
+            const minDP = harga * 0.1;
+            if (dp < minDP) {
+                return {
+                    isValid: false,
+                    message: `⚠️ Uang muka minimum adalah 10% dari harga (Rp ${formatCurrency(minDP)})`
+                };
+            }
+
+            if (bunga < 0 || bunga > 20) {
+                return {
+                    isValid: false,
+                    message: "❌ Suku bunga harus antara 0-20%"
+                };
+            }
+
+            if (tenor <= 0 || tenor > 30) {
+                return {
+                    isValid: false,
+                    message: "❌ Tenor harus antara 1-30 tahun"
+                };
+            }
+
+            return { isValid: true, message: "" };
+        }
+
+        /**
+         * Calculate KPR monthly installment using compound interest formula
+         * Formula: P = L[c(1 + c)^n]/[(1 + c)^n - 1]
+         */
+        function hitungKPR() {
+            // Clear previous error
+            validationError.classList.remove('show');
+            validationError.textContent = '';
+
+            // Validate inputs
+            const validation = validateKPRInputs();
+            if (!validation.isValid) {
+                validationError.textContent = validation.message;
+                validationError.classList.add('show');
+                hasilKPR.innerHTML = '<p>Periksa kembali data Anda</p>';
+                return;
+            }
+
+            const harga = parseFloat(hargaInput.value) || 0;
+            const dp = parseFloat(dpInput.value) || 0;
+            const bunga = parseFloat(bungaInput.value) || 0;
+            const tenor = parseFloat(tenorInput.value) || 0;
+
+            if (harga === 0) {
+                hasilKPR.innerHTML = '<p>Masukkan data untuk melihat simulasi KPR</p>';
+                return;
+            }
+
+            const pinjaman = harga - dp;
+            const bungaBulanan = bunga / 100 / 12;
+            const bulan = tenor * 12;
+            
+            let angsuran = 0;
+            if (pinjaman > 0 && bunga > 0 && tenor > 0) {
+                const pembilang = bungaBulanan * Math.pow(1 + bungaBulanan, bulan);
+                const penyebut = Math.pow(1 + bungaBulanan, bulan) - 1;
+                angsuran = pinjaman * (pembilang / penyebut);
+            }
+
+            const totalBayar = angsuran * bulan;
+            const totalBunga = totalBayar - pinjaman;
+
+            hasilKPR.innerHTML = `
+                <p>
+                    <span class="result-label">Jumlah Pinjaman:</span><br>
+                    <span class="result-value">Rp ${formatCurrency(pinjaman)}</span>
+                </p>
+                <p>
+                    <span class="result-label">Angsuran per Bulan:</span><br>
+                    <span class="result-value">Rp ${formatCurrency(angsuran)}</span>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.95rem; opacity: 0.8;">
+                    Total bayar selama ${tenor} tahun: Rp ${formatCurrency(totalBayar)}<br>
+                    Total bunga: Rp ${formatCurrency(totalBunga)}
+                </p>
+            `;
+        }
+
+        // ==================== FADE-IN ANIMATION ====================
+
+        /**
+         * Check and apply fade-in animation to elements
+         */
+        function checkFadeInElements() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // ==================== SCROLL EVENTS ====================
+
+        /**
+         * Setup scroll event listeners
+         */
+        function setupScrollEvents() {
+            window.addEventListener('scroll', checkFadeInElements, { passive: true });
+            window.addEventListener('scroll', handleBackToTopButton, { passive: true });
+        }
+
+        /**
+         * Handle back-to-top button visibility
+         */
+        function handleBackToTopButton() {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        }
+
+        /**
+         * Scroll to top smoothly
+         */
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ==================== EVENT LISTENERS ====================
+
+        /**
+         * Attach event listeners to form inputs
+         */
+        function attachEventListeners() {
+            const inputs = [hargaInput, dpInput, bungaInput, tenorInput];
+            
+            inputs.forEach(input => {
+                // Use 'input' event for real-time updates
+                input.addEventListener('input', hitungKPR, { passive: true });
+                
+                // Use 'change' event for validation after focus loss
+                input.addEventListener('change', hitungKPR);
+            });
+
+            // Prevent form submission
+            kprForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+            });
+        }
+
+        // ==================== PAGE LOAD ====================
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // Check fade-in on initial load
+        window.addEventListener('load', checkFadeInElements);
+    </script>
+</body>
+</html>
