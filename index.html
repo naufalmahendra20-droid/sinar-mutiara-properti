@@ -3,138 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinar Mutiara Properti - Rumah Impian dengan Simulasi KPR</title>
-    <meta name="description" content="Temukan properti idaman dan hitung simulasi KPR secara real-time. Sinar Mutiara Properti siap membantu Anda.">
-    <meta name="theme-color" content="#2c3e50">
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Sinar Mutiara Properti">
-    <meta property="og:description" content="Simulasi KPR interaktif dan listing properti pilihan.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://naufalmahendra20-droid.github.io/sinar-mutiara-properti">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Properti">
-    <!-- Font Awesome Icons (untuk ikon kecil) -->
+    <title>Sinar Mutiara Properti - Rumah Impian</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        /* ===== RESET & VARIABLES ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         :root {
-            --primary: #2c3e50;
-            --primary-light: #34495e;
-            --accent: #e67e22;
-            --accent-light: #f39c12;
-            --success: #27ae60;
-            --error: #c0392b;
-            --bg: #f8fafc;
+            --primary: #0a2647;
+            --primary-light: #144272;
+            --secondary: #2c74b3;
+            --accent: #ffb703;
+            --accent-light: #ffd966;
+            --success: #2ecc71;
+            --error: #e74c3c;
+            --bg: #f4f7fc;
             --card-bg: #ffffff;
             --text: #1e293b;
             --text-light: #64748b;
             --border: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-            --radius: 12px;
+            --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
+            --radius: 16px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0f172a;
-                --card-bg: #1e293b;
-                --text: #f1f5f9;
-                --text-light: #94a3b8;
-                --border: #334155;
-            }
-        }
-
         body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background 0.3s;
         }
 
-        /* ===== TYPOGRAPHY ===== */
-        h1, h2, h3 {
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-        h1 { font-size: clamp(2rem, 5vw, 2.5rem); }
-        h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 1.5rem; }
-        h3 { font-size: 1.25rem; }
-
-        /* ===== HEADER ===== */
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        /* Header dengan background brand */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 3rem 1rem;
+            padding: 4rem 2rem;
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .header h1 {
-            margin-bottom: 0.5rem;
-            animation: fadeInDown 0.8s ease;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
         }
 
-        .header p {
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInDown 0.8s;
+        }
+
+        .hero p {
             font-size: 1.2rem;
             opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease 0.1s both;
+            animation: fadeInUp 0.8s 0.2s both;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .brand-story {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            border-left: 5px solid var(--accent);
         }
 
-        @keyframes fadeInUp {
+        .brand-story h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .brand-story p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Navigasi antar halaman */
+        .page-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .page-btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            background: var(--card-bg);
+            color: var(--text);
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .page-btn.active {
+            background: var(--accent);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== CONTAINER ===== */
+        /* Kontainer utama */
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 2rem 4rem;
+            padding: 0 2rem;
         }
 
-        /* ===== SLIDER ===== */
+        /* Slider */
         .swiper {
             width: 100%;
             height: 450px;
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow-xl);
-            margin-bottom: 4rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
         }
 
         .swiper-slide {
             position: relative;
-        }
-
-        .swiper-slide::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, transparent 50%);
         }
 
         .swiper-slide img {
@@ -148,13 +184,8 @@
             bottom: 2rem;
             left: 2rem;
             color: white;
-            z-index: 10;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .slide-caption h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.25rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            z-index: 2;
         }
 
         .swiper-button-prev, .swiper-button-next {
@@ -170,32 +201,27 @@
             background: var(--accent);
         }
 
-        .swiper-button-prev::after, .swiper-button-next::after {
-            font-size: 1.5rem;
-        }
-
         .swiper-pagination-bullet-active {
             background: var(--accent) !important;
         }
 
-        /* ===== PROPERTIES GRID ===== */
+        /* Grid Properti */
         .section-title {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin: 3rem 0 2rem;
         }
 
         .section-title i {
-            color: var(--accent);
             font-size: 2rem;
+            color: var(--accent);
         }
 
         .properties-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-bottom: 4rem;
         }
 
         .property-card {
@@ -206,7 +232,7 @@
             transition: var(--transition);
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+            transition: opacity 0.6s, transform 0.6s, box-shadow 0.3s;
         }
 
         .property-card.visible {
@@ -215,14 +241,14 @@
         }
 
         .property-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
 
         .property-image {
-            position: relative;
             height: 220px;
             overflow: hidden;
+            position: relative;
         }
 
         .property-image img {
@@ -241,10 +267,9 @@
             top: 1rem;
             right: 1rem;
             background: var(--accent);
-            color: white;
-            padding: 0.3rem 0.8rem;
+            color: var(--primary);
+            padding: 0.3rem 1rem;
             border-radius: 20px;
-            font-size: 0.8rem;
             font-weight: 600;
             z-index: 2;
         }
@@ -253,102 +278,131 @@
             padding: 1.5rem;
         }
 
-        .property-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .property-desc {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
         .property-price {
             font-size: 1.6rem;
             font-weight: 700;
             color: var(--accent);
-            margin-bottom: 1rem;
+            margin: 0.5rem 0;
         }
 
-        .property-price small {
-            font-size: 0.9rem;
-            font-weight: normal;
-            color: var(--text-light);
-        }
-
-        .property-cta {
-            display: inline-block;
+        .btn-detail {
             background: transparent;
             border: 2px solid var(--accent);
             color: var(--accent);
             padding: 0.5rem 1.5rem;
             border-radius: 30px;
             font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
             cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
         }
 
-        .property-cta:hover {
+        .btn-detail:hover {
             background: var(--accent);
             color: white;
         }
 
-        /* ===== KPR CALCULATOR ===== */
-        .kpr-section {
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .promo-banner h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .promo-banner p {
+            font-size: 1.2rem;
+        }
+
+        .promo-banner .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .promo-banner .btn:hover {
+            background: var(--primary-light);
+            transform: scale(1.05);
+        }
+
+        /* Kolom Komentar */
+        .testimonials {
             background: var(--card-bg);
             border-radius: var(--radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-lg);
-            margin: 4rem 0;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-md);
         }
 
-        .kpr-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .kpr-header i {
-            font-size: 2.5rem;
-            color: var(--accent);
-        }
-
-        .kpr-form {
+        .comment-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
+            margin: 2rem 0;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 1rem;
         }
 
-        .form-group {
+        .comment-item {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--accent);
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .comment-header {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
         }
 
-        .form-group label {
+        .comment-name {
             font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: var(--text);
+            color: var(--primary);
         }
 
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
+        .comment-rating {
+            color: gold;
         }
 
-        .input-wrapper i {
-            position: absolute;
-            left: 1rem;
+        .comment-date {
+            font-size: 0.8rem;
             color: var(--text-light);
         }
 
-        .input-wrapper input {
-            width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.8rem;
+        .comment-text {
+            margin-top: 0.5rem;
+        }
+
+        .add-comment {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .add-comment input, .add-comment select, .add-comment textarea {
+            padding: 0.75rem;
             border: 2px solid var(--border);
             border-radius: 30px;
             font-size: 1rem;
@@ -357,109 +411,119 @@
             transition: var(--transition);
         }
 
-        .input-wrapper input:focus {
+        .add-comment input:focus, .add-comment select:focus, .add-comment textarea:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
         }
 
-        .input-wrapper input:invalid {
-            border-color: var(--error);
+        .add-comment textarea {
+            grid-column: span 3;
+            resize: vertical;
+            border-radius: 20px;
         }
 
-        .help-text {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 0.3rem;
-        }
-
-        .error-message {
-            background: rgba(192, 57, 43, 0.1);
-            color: var(--error);
-            padding: 1rem;
-            border-radius: 30px;
-            margin: 1rem 0 0;
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-            border-left: 4px solid var(--error);
-        }
-
-        .error-message.show {
-            display: flex;
-        }
-
-        .result-box {
-            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
-            padding: 1.8rem;
-            border-radius: 30px;
-            margin-top: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            border-left: 4px solid var(--success);
-        }
-
-        .result-item {
-            text-align: center;
-        }
-
-        .result-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-light);
-        }
-
-        .result-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .result-note {
-            grid-column: 1 / -1;
-            font-size: 0.9rem;
-            color: var(--text-light);
-            text-align: center;
-            border-top: 1px solid var(--border);
-            padding-top: 1rem;
-        }
-
-        /* ===== BACK TO TOP ===== */
-        #backToTop {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+        .add-comment button {
+            grid-column: span 3;
             background: var(--primary);
             color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
             border: none;
+            padding: 1rem;
+            border-radius: 40px;
+            font-weight: 600;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-lg);
             transition: var(--transition);
-            z-index: 99;
-            opacity: 0;
-            visibility: hidden;
         }
 
-        #backToTop.show {
-            opacity: 1;
-            visibility: visible;
+        .add-comment button:hover {
+            background: var(--secondary);
         }
 
-        #backToTop:hover {
-            background: var(--accent);
-            transform: scale(1.1);
+        /* Modal denah */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
         }
 
-        /* ===== FOOTER ===== */
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            animation: zoomIn 0.3s forwards;
+        }
+
+        @keyframes zoomIn {
+            to { transform: scale(1); }
+        }
+
+        .modal-content img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: var(--radius);
+            margin-top: 1rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .close:hover {
+            color: var(--error);
+        }
+
+        /* Tombol Sosial Media */
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .social-btn.whatsapp { background: #25D366; }
+        .social-btn.instagram { background: linear-gradient(45deg, #f09433, #d62976, #962fbf); }
+        .social-btn.email { background: #EA4335; }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            filter: brightness(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
         .footer {
             background: var(--primary);
             color: white;
@@ -468,132 +532,147 @@
             margin-top: 4rem;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* Responsif */
         @media (max-width: 768px) {
-            .container { padding: 0 1.5rem 2rem; }
             .swiper { height: 300px; }
-            .kpr-form { grid-template-columns: 1fr; }
-            .result-box { grid-template-columns: 1fr; }
-            .slide-caption h3 { font-size: 1.2rem; }
-        }
-
-        @media (max-width: 480px) {
-            .header { padding: 2rem 1rem; }
-            .properties-grid { grid-template-columns: 1fr; }
-            #backToTop { width: 40px; height: 40px; font-size: 1.2rem; }
+            .add-comment { grid-template-columns: 1fr; }
+            .add-comment textarea, .add-comment button { grid-column: span 1; }
+            .promo-banner { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>Sinar Mutiara Properti</h1>
-        <p>Wujudkan rumah impian dengan simulasi KPR instan dan pilihan properti terbaik</p>
-    </header>
-
-    <main class="container">
-        <!-- Swiper Slider -->
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=400&fit=crop" alt="Rumah modern dengan kolam renang">
-                    <div class="slide-caption">
-                        <h3>Cluster Eksklusif</h3>
-                        <p>Lokasi strategis, lingkungan asri</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=400&fit=crop" alt="Villa minimalis">
-                    <div class="slide-caption">
-                        <h3>Villa Minimalis</h3>
-                        <p>Desain modern, cocok untuk keluarga</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&h=400&fit=crop" alt="Apartemen mewah">
-                    <div class="slide-caption">
-                        <h3>Apartemen Mewah</h3>
-                        <p>Pemandangan kota, fully furnished</p>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-pagination"></div>
+    <!-- Hero Section dengan copywriting brand -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sinar Mutiara Properti</h1>
+            <p>Membangun mimpi, menciptakan masa depan. Hunian berkualitas dengan layanan terpercaya sejak 2005.</p>
         </div>
+    </section>
 
-        <!-- Daftar Properti -->
-        <div class="section-title">
-            <i class="fas fa-building"></i>
-            <h2>Properti Pilihan</h2>
+    <!-- Brand Story -->
+    <div class="container">
+        <div class="brand-story">
+            <h2><i class="fas fa-gem"></i> Sinar Mutiara: Lebih dari Sekadar Properti</h2>
+            <p>Kami percaya bahwa rumah adalah fondasi kebahagiaan keluarga. Dengan pengalaman 20 tahun, kami menghadirkan hunian yang tidak hanya indah, tetapi juga nyaman dan bernilai investasi tinggi. Setiap properti dirancang dengan detail dan perhatian, menggunakan material berkualitas, serta didukung tim profesional yang siap membantu Anda.</p>
         </div>
-        <div class="properties-grid" id="propertyGrid"></div>
+    </div>
 
-        <!-- Kalkulator KPR -->
-        <section class="kpr-section" id="kpr">
-            <div class="kpr-header">
-                <i class="fas fa-calculator"></i>
-                <h2>Simulasi KPR Real-Time</h2>
+    <!-- Navigasi Halaman (2 halaman) -->
+    <div class="page-nav">
+        <button class="page-btn active" id="btnPage1">🏠 Properti & Promo</button>
+        <button class="page-btn" id="btnPage2">💬 Testimoni & Denah</button>
+    </div>
+
+    <!-- Halaman 1: Properti, Slider, Promo -->
+    <div id="page1" class="page active-page">
+        <div class="container">
+            <!-- Swiper Slider -->
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=450&fit=crop" alt="Rumah Modern">
+                        <div class="slide-caption">
+                            <h3>Cluster Emerald</h3>
+                            <p>Lingkungan eksklusif, dekat pusat kota</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=450&fit=crop" alt="Villa">
+                        <div class="slide-caption">
+                            <h3>Villa Bukit Indah</h3>
+                            <p>Pemandangan pegunungan, udara sejuk</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&h=450&fit=crop" alt="Apartemen">
+                        <div class="slide-caption">
+                            <h3>Apartemen Mutiara</h3>
+                            <p>Studio mewah, fully furnished</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-pagination"></div>
             </div>
-            <form id="kprForm" class="kpr-form">
-                <div class="form-group">
-                    <label for="harga">Harga Properti (Rp)</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-home"></i>
-                        <input type="number" id="harga" placeholder="Misal: 850000000" min="0" step="1000000" value="850000000">
-                    </div>
-                    <span class="help-text">Contoh: 850000000 (850 juta)</span>
-                </div>
-                <div class="form-group">
-                    <label for="dp">Uang Muka (Rp)</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-hand-holding-usd"></i>
-                        <input type="number" id="dp" placeholder="Misal: 200000000" min="0" step="1000000" value="200000000">
-                    </div>
-                    <span class="help-text">Minimal 10% dari harga</span>
-                </div>
-                <div class="form-group">
-                    <label for="bunga">Suku Bunga (% per tahun)</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-percent"></i>
-                        <input type="number" id="bunga" placeholder="Misal: 8.5" min="0" max="20" step="0.1" value="8.5">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="tenor">Tenor (tahun)</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-calendar-alt"></i>
-                        <input type="number" id="tenor" placeholder="Misal: 15" min="1" max="30" step="1" value="15">
-                    </div>
-                </div>
-            </form>
-            <div id="validationError" class="error-message">
-                <i class="fas fa-exclamation-circle"></i>
-                <span></span>
+
+            <!-- Section Properti -->
+            <div class="section-title">
+                <i class="fas fa-building"></i>
+                <h2>Properti Pilihan</h2>
             </div>
-            <div class="result-box" id="hasilKPR">
-                <div class="result-item">
-                    <div class="result-label">Pinjaman</div>
-                    <div class="result-value" id="pinjamanValue">Rp 0</div>
+            <div class="properties-grid" id="propertyGrid"></div>
+
+            <!-- Banner Promo -->
+            <div class="promo-banner">
+                <div>
+                    <h3>🎉 Promo Spesial Bulan Ini!</h3>
+                    <p>Diskon hingga 10% untuk pembelian pertama + gratis biaya notaris.</p>
                 </div>
-                <div class="result-item">
-                    <div class="result-label">Angsuran / Bulan</div>
-                    <div class="result-value" id="angsuranValue">Rp 0</div>
-                </div>
-                <div class="result-item">
-                    <div class="result-label">Total Bunga</div>
-                    <div class="result-value" id="bungaValue">Rp 0</div>
-                </div>
-                <div class="result-note" id="totalBayarNote"></div>
+                <a href="#" class="btn" onclick="event.preventDefault()">Klaim Promo</a>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
+
+    <!-- Halaman 2: Testimoni & Denah -->
+    <div id="page2" class="page">
+        <div class="container">
+            <!-- Kolom Komentar Interaktif -->
+            <div class="testimonials">
+                <h2><i class="fas fa-comments"></i> Apa Kata Mereka?</h2>
+                <div class="comment-list" id="commentList">
+                    <!-- Komentar akan di-render oleh JS -->
+                </div>
+
+                <h3>Tulis Komentar Anda</h3>
+                <div class="add-comment">
+                    <input type="text" id="commentName" placeholder="Nama Anda" required>
+                    <select id="commentRating">
+                        <option value="5">⭐ 5</option>
+                        <option value="4">⭐ 4</option>
+                        <option value="3">⭐ 3</option>
+                        <option value="2">⭐ 2</option>
+                        <option value="1">⭐ 1</option>
+                    </select>
+                    <input type="text" id="commentTitle" placeholder="Judul (opsional)">
+                    <textarea id="commentText" placeholder="Komentar..." rows="3"></textarea>
+                    <button id="submitComment">Kirim Komentar</button>
+                </div>
+            </div>
+
+            <!-- Tipe Rumah dengan Denah (klik untuk lihat denah) -->
+            <div class="section-title">
+                <i class="fas fa-draw-polygon"></i>
+                <h2>Tipe Rumah & Denah</h2>
+            </div>
+            <div class="properties-grid" id="typeGrid">
+                <!-- Akan diisi dengan tipe rumah -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Tombol Sosial Media Interaktif -->
+    <div class="container">
+        <div class="social-buttons">
+            <a href="https://wa.me/6281234567890" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://instagram.com/sinarmutiaraproperti" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="mailto:info@sinarmutiaraproperti.com" class="social-btn email"><i class="fas fa-envelope"></i> Email</a>
+        </div>
+    </div>
+
+    <!-- Modal Denah -->
+    <div id="denahModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modalTitle">Denah Rumah</h3>
+            <img id="modalImage" src="" alt="Denah">
+        </div>
+    </div>
 
     <footer class="footer">
-        <p>&copy; 2026 Sinar Mutiara Properti. All rights reserved.</p>
+        <p>&copy; 2026 Sinar Mutiara Properti. All rights reserved. | Jl. Raya Indah No. 123, Jakarta</p>
     </footer>
-
-    <!-- Tombol Back to Top -->
-    <button id="backToTop" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -603,78 +682,126 @@
 
             // ========== DATA ==========
             const properties = [
-                {
-                    id: 1,
-                    title: "Rumah Cluster Mewah",
-                    description: "LT 120m², LB 90m², 3KT, 2KM, carport, taman belakang",
-                    price: 850000000,
-                    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop",
-                    alt: "Rumah cluster mewah dengan taman",
-                    tag: "Best Seller"
-                },
-                {
-                    id: 2,
-                    title: "Villa Minimalis",
-                    description: "LT 200m², LB 150m², 4KT, 3KM, kolam renang pribadi",
-                    price: 1200000000,
-                    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop",
-                    alt: "Villa minimalis dengan kolam renang",
-                    tag: "Premium"
-                },
-                {
-                    id: 3,
-                    title: "Apartemen Studio",
-                    description: "LT 36m², fully furnished, view kota, akses mall",
-                    price: 450000000,
-                    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop",
-                    alt: "Apartemen studio modern",
-                    tag: "Promo"
-                },
-                {
-                    id: 4,
-                    title: "Rumah Tradisional",
-                    description: "LT 300m², LB 200m², 5KT, 4KM, konsep joglo",
-                    price: 950000000,
-                    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop",
-                    alt: "Rumah tradisional joglo",
-                    tag: "Eksklusif"
-                }
+                { id: 1, title: "Cluster Emerald", desc: "LT 120m², LB 90m², 3KT, 2KM, carport", price: 850000000, image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&h=400&fit=crop", tag: "Best", type: "Emerald", denah: "https://via.placeholder.com/800x600?text=Denah+Emerald" },
+                { id: 2, title: "Villa Bukit Indah", desc: "LT 200m², LB 150m², 4KT, 3KM, kolam", price: 1250000000, image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&h=400&fit=crop", tag: "Premium", type: "Bukit", denah: "https://via.placeholder.com/800x600?text=Denah+Villa" },
+                { id: 3, title: "Apartemen Mutiara", desc: "Studio 36m², fully furnished", price: 450000000, image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop", tag: "Promo", type: "Studio", denah: "https://via.placeholder.com/800x600?text=Denah+Studio" },
+                { id: 4, title: "Rumah Kayu Manis", desc: "LT 150m², LB 120m², 3KT, 2KM, taman", price: 980000000, image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop", tag: "Eksklusif", type: "Kayu", denah: "https://via.placeholder.com/800x600?text=Denah+Kayu" }
+            ];
+
+            // Tipe rumah untuk denah
+            const houseTypes = properties.map(p => ({
+                id: p.id,
+                name: p.title,
+                type: p.type,
+                denah: p.denah
+            }));
+
+            // Data komentar awal
+            let comments = [
+                { name: "Budi Santoso", rating: 5, title: "Pelayanan memuaskan", text: "Rumah sesuai spek, proses cepat. Terima kasih!", date: "2026-02-15" },
+                { name: "Siti Aminah", rating: 4, title: "Bagus", text: "Lokasi strategis, hanya perlu sedikit perbaikan.", date: "2026-02-20" },
             ];
 
             // ========== DOM ELEMENTS ==========
             const propertyGrid = document.getElementById('propertyGrid');
-            const hargaInput = document.getElementById('harga');
-            const dpInput = document.getElementById('dp');
-            const bungaInput = document.getElementById('bunga');
-            const tenorInput = document.getElementById('tenor');
-            const hasilKPR = document.getElementById('hasilKPR');
-            const pinjamanSpan = document.getElementById('pinjamanValue');
-            const angsuranSpan = document.getElementById('angsuranValue');
-            const bungaTotalSpan = document.getElementById('bungaValue');
-            const totalBayarNote = document.getElementById('totalBayarNote');
-            const validationError = document.getElementById('validationError');
-            const errorSpan = validationError.querySelector('span');
-            const backToTop = document.getElementById('backToTop');
-            const kprForm = document.getElementById('kprForm');
+            const typeGrid = document.getElementById('typeGrid');
+            const commentList = document.getElementById('commentList');
+            const modal = document.getElementById('denahModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImage = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close');
+            const btnPage1 = document.getElementById('btnPage1');
+            const btnPage2 = document.getElementById('btnPage2');
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+            const submitComment = document.getElementById('submitComment');
 
             // ========== RENDER PROPERTIES ==========
             function renderProperties() {
-                propertyGrid.innerHTML = properties.map(prop => `
-                    <div class="property-card fade-in" data-id="${prop.id}">
+                propertyGrid.innerHTML = properties.map(p => `
+                    <div class="property-card fade-in" data-id="${p.id}">
                         <div class="property-image">
-                            <img src="${prop.image}" alt="${prop.alt}" loading="lazy">
-                            <span class="property-tag">${prop.tag}</span>
+                            <img src="${p.image}" alt="${p.title}" loading="lazy">
+                            <span class="property-tag">${p.tag}</span>
                         </div>
                         <div class="property-content">
-                            <h3 class="property-title">${escapeHtml(prop.title)}</h3>
-                            <p class="property-desc">${escapeHtml(prop.description)}</p>
-                            <div class="property-price">Rp ${formatCurrency(prop.price)} <small></small></div>
-                            <a href="#" class="property-cta" onclick="event.preventDefault()">Detail</a>
+                            <h3>${escapeHtml(p.title)}</h3>
+                            <p>${escapeHtml(p.desc)}</p>
+                            <div class="property-price">Rp ${formatCurrency(p.price)}</div>
+                            <button class="btn-detail" onclick="alert('Detail properti ${p.id}')">Lihat Detail</button>
                         </div>
                     </div>
                 `).join('');
             }
 
+            function renderHouseTypes() {
+                typeGrid.innerHTML = houseTypes.map(t => `
+                    <div class="property-card" data-type="${t.type}">
+                        <div class="property-content">
+                            <h3>${escapeHtml(t.name)}</h3>
+                            <p>Tipe: ${t.type}</p>
+                            <button class="btn-detail view-denah" data-denah="${t.denah}" data-name="${t.name}">Lihat Denah</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Event listener untuk tombol lihat denah
+                document.querySelectorAll('.view-denah').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const denah = btn.dataset.denah;
+                        const name = btn.dataset.name;
+                        modalTitle.textContent = `Denah ${name}`;
+                        modalImage.src = denah;
+                        modal.style.display = 'flex';
+                    });
+                });
+            }
+
+            // ========== RENDER KOMENTAR ==========
+            function renderComments() {
+                commentList.innerHTML = comments.map(c => `
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <span class="comment-name">${escapeHtml(c.name)}</span>
+                            <span class="comment-rating">${'⭐'.repeat(c.rating)}</span>
+                            <span class="comment-date">${c.date}</span>
+                        </div>
+                        <div class="comment-title"><strong>${escapeHtml(c.title || '')}</strong></div>
+                        <div class="comment-text">${escapeHtml(c.text)}</div>
+                    </div>
+                `).join('');
+            }
+
+            // Tambah komentar baru
+            function addComment() {
+                const name = document.getElementById('commentName').value.trim();
+                const rating = document.getElementById('commentRating').value;
+                const title = document.getElementById('commentTitle').value.trim();
+                const text = document.getElementById('commentText').value.trim();
+
+                if (!name || !text) {
+                    alert('Nama dan komentar harus diisi!');
+                    return;
+                }
+
+                const newComment = {
+                    name,
+                    rating: parseInt(rating),
+                    title: title || 'Komentar',
+                    text,
+                    date: new Date().toISOString().slice(0,10)
+                };
+                comments.unshift(newComment); // tambah di awal
+                renderComments();
+
+                // Reset form
+                document.getElementById('commentName').value = '';
+                document.getElementById('commentTitle').value = '';
+                document.getElementById('commentText').value = '';
+                document.getElementById('commentRating').value = '5';
+            }
+
+            // ========== UTILITIES ==========
             function escapeHtml(text) {
                 const div = document.createElement('div');
                 div.textContent = text;
@@ -685,132 +812,67 @@
                 return new Intl.NumberFormat('id-ID').format(value);
             }
 
-            // ========== KPR CALCULATOR ==========
-            function validateInputs() {
-                const harga = parseFloat(hargaInput.value) || 0;
-                const dp = parseFloat(dpInput.value) || 0;
-                const bunga = parseFloat(bungaInput.value) || 0;
-                const tenor = parseFloat(tenorInput.value) || 0;
-
-                if (harga <= 0) return { valid: false, msg: 'Harga properti harus lebih dari 0' };
-                if (dp < 0) return { valid: false, msg: 'Uang muka tidak boleh negatif' };
-                if (dp > harga) return { valid: false, msg: 'Uang muka tidak boleh melebihi harga' };
-                const minDp = harga * 0.1;
-                if (dp < minDp) return { valid: false, msg: `Uang muka minimal 10% (Rp ${formatCurrency(minDp)})` };
-                if (bunga < 0 || bunga > 20) return { valid: false, msg: 'Suku bunga harus antara 0-20%' };
-                if (tenor < 1 || tenor > 30) return { valid: false, msg: 'Tenor harus antara 1-30 tahun' };
-                return { valid: true };
-            }
-
-            function hitungKPR() {
-                const validation = validateInputs();
-                if (!validation.valid) {
-                    validationError.classList.add('show');
-                    errorSpan.textContent = validation.msg;
-                    // Reset tampilan hasil
-                    pinjamanSpan.textContent = 'Rp 0';
-                    angsuranSpan.textContent = 'Rp 0';
-                    bungaTotalSpan.textContent = 'Rp 0';
-                    totalBayarNote.textContent = '';
-                    return;
-                } else {
-                    validationError.classList.remove('show');
-                }
-
-                const harga = parseFloat(hargaInput.value);
-                const dp = parseFloat(dpInput.value);
-                const bunga = parseFloat(bungaInput.value);
-                const tenor = parseFloat(tenorInput.value);
-
-                const pinjaman = harga - dp;
-                const bungaBulanan = bunga / 100 / 12;
-                const bulan = tenor * 12;
-
-                let angsuran = 0;
-                let totalBunga = 0;
-                let totalBayar = 0;
-
-                if (pinjaman > 0 && bunga > 0 && tenor > 0) {
-                    if (bungaBulanan === 0) {
-                        angsuran = pinjaman / bulan;
-                    } else {
-                        const factor = Math.pow(1 + bungaBulanan, bulan);
-                        angsuran = pinjaman * (bungaBulanan * factor) / (factor - 1);
-                    }
-                    totalBayar = angsuran * bulan;
-                    totalBunga = totalBayar - pinjaman;
-                }
-
-                pinjamanSpan.textContent = `Rp ${formatCurrency(pinjaman)}`;
-                angsuranSpan.textContent = `Rp ${formatCurrency(angsuran)}`;
-                bungaTotalSpan.textContent = `Rp ${formatCurrency(totalBunga)}`;
-                totalBayarNote.textContent = `Total pembayaran selama ${tenor} tahun: Rp ${formatCurrency(totalBayar)}`;
-            }
-
-            // ========== ANIMASI SCROLL (FADE-IN) ==========
+            // ========== ANIMASI SCROLL ==========
             function checkFadeIn() {
-                const cards = document.querySelectorAll('.property-card.fade-in');
-                const windowHeight = window.innerHeight;
-                cards.forEach(card => {
+                document.querySelectorAll('.property-card.fade-in').forEach(card => {
                     const rect = card.getBoundingClientRect();
-                    if (rect.top < windowHeight - 100) {
+                    if (rect.top < window.innerHeight - 100) {
                         card.classList.add('visible');
                     }
                 });
             }
 
-            // ========== BACK TO TOP ==========
-            function toggleBackToTop() {
-                if (window.scrollY > 300) {
-                    backToTop.classList.add('show');
-                } else {
-                    backToTop.classList.remove('show');
-                }
-            }
-
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // ========== SWIPER INIT ==========
+            // ========== SWIPER ==========
             function initSwiper() {
                 new Swiper('.mySwiper', {
                     loop: true,
-                    autoplay: { delay: 5000, disableOnInteraction: false },
+                    autoplay: { delay: 4000 },
                     navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
                     pagination: { el: '.swiper-pagination', clickable: true },
                     effect: 'fade',
-                    fadeEffect: { crossFade: true },
                 });
             }
 
-            // ========== EVENT LISTENERS ==========
-            function attachEvents() {
-                [hargaInput, dpInput, bungaInput, tenorInput].forEach(input => {
-                    input.addEventListener('input', hitungKPR);
-                });
-                kprForm.addEventListener('submit', e => e.preventDefault());
-                window.addEventListener('scroll', () => {
-                    checkFadeIn();
-                    toggleBackToTop();
-                }, { passive: true });
-                window.addEventListener('load', () => {
-                    checkFadeIn();
-                    hitungKPR();
-                });
+            // ========== NAVIGASI HALAMAN ==========
+            function switchPage(page) {
+                if (page === 1) {
+                    page1.classList.add('active-page');
+                    page2.classList.remove('active-page');
+                    btnPage1.classList.add('active');
+                    btnPage2.classList.remove('active');
+                } else {
+                    page1.classList.remove('active-page');
+                    page2.classList.add('active-page');
+                    btnPage1.classList.remove('active');
+                    btnPage2.classList.add('active');
+                }
             }
+
+            // ========== MODAL CLOSE ==========
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+
+            // ========== EVENT LISTENERS ==========
+            window.addEventListener('scroll', checkFadeIn, { passive: true });
+            btnPage1.addEventListener('click', () => switchPage(1));
+            btnPage2.addEventListener('click', () => switchPage(2));
+            submitComment.addEventListener('click', addComment);
 
             // ========== INIT ==========
             function init() {
                 renderProperties();
+                renderHouseTypes();
+                renderComments();
                 initSwiper();
-                attachEvents();
-                // Panggil sekali untuk hasil awal
-                hitungKPR();
+                checkFadeIn(); // untuk properti yang sudah tampil
             }
 
             init();
         })();
     </script>
 </body>
-</html>
+        </html> 
